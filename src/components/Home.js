@@ -1,8 +1,6 @@
 import React from 'react'
 
 export default function Home() {
-
-
     return (
         <div>
             <section class="section section--head section--head-fixed">
