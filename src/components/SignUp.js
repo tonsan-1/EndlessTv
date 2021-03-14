@@ -54,11 +54,6 @@ export default function SignUp() {
                                     <input type="password" ref={passwordConfirmRef} required className="sign__input" placeholder="Confirm Password" />
                                 </div>
 
-                                {/* <div className="sign__group sign__group--checkbox">
-                                    <input id="remember" name="remember" type="checkbox" checked="false" onChange={onChange} />
-                                    <label for="remember">I agree to the <Link to="/privacy">Privacy Policy</Link></label>
-                                </div> */}
-
                                 <button disabled={loading} className="sign__btn" type="submit">Sign up</button>
 
                                 <span className="sign__text">Already have an account? <Link to="/signin">Sign in!</Link></span>
