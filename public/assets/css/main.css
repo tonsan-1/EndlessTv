@@ -4538,6 +4538,9 @@ body::-webkit-scrollbar-thumb {
 .sign__form--first {
   margin-top: 0;
 }
+.section--full-bg{
+  background-color: #161F30;
+}
 .sign__logo {
   display: block;
   margin-bottom: 30px;

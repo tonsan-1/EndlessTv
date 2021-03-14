@@ -18,7 +18,6 @@ function App() {
           <Route path="/signup">
             <SignUp />
           </Route>
-
           <Route exact path="/">
             <Home />
           </Route>
