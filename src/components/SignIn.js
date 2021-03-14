@@ -15,7 +15,6 @@ export default function SignUp() {
     function handleSubmit(e) {
         e.preventDefault()
 
-
         login(emailRef.current.value, passwordRef.current.value)
             .then(res => {
                 setError('');
