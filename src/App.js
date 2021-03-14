@@ -4,8 +4,7 @@ import { AuthProvider } from './services/Auth'
 import SignIn from './components/SignIn'
 import SignUp from './components/SignUp'
 import Layout from './components/Layout'
-import PrivateRoute from './services/PrivateRoute'
-
+import PrivateRoute from './components/PrivateRoute'
 
 function App() {
   return (
