@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { useAuth } from '../services/Auth'
 import { Alert } from 'react-bootstrap'
 
@@ -10,6 +10,8 @@ export default function SignUp() {
     const { signup } = useAuth();
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
+    const history = useHistory();
+
 
     function handleSubmit(e) {
         e.preventDefault()
@@ -23,6 +25,8 @@ export default function SignUp() {
             .then(res => {
                 setError('');
                 setLoading(true);
+                history.push('/');
+
             })
             .catch(error => {
                 setError(error.message);
