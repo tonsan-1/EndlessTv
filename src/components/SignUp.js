@@ -26,7 +26,6 @@ export default function SignUp() {
                 setError('');
                 setLoading(true);
                 history.push('/');
-
             })
             .catch(error => {
                 setError(error.message);

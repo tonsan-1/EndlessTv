@@ -1,10 +1,25 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import { GetMovieGenres } from '../services/Fetcher'
+import Category from './Category'
 
-import DummyImageCategory from '../img/category/1.jpg'
 import DummyImageCard from '../img/card/1.png'
 
 
 export default function Home() {
+    const [genres, setGenres] = useState([]);
+
+    useEffect(() => {
+        GetMovieGenres()
+            .then((res) => res.json())
+            .then((data) => {
+                if (!data.errors) {
+                    setGenres(data.genres)
+                } else {
+                    setGenres([])
+                }
+            })
+    }, [])
+
     return (
         <div>
             <section className="section section--head section--head-fixed">
@@ -20,85 +35,9 @@ export default function Home() {
             <section className="section section--pb0">
                 <div className="container">
                     <div className="row row--grid">
-                        <div className="col-12 col-sm-6 col-lg-4 col-xl-3">
-                            <a href="category.html" className="category">
-                                <div className="category__cover">
-                                    <img src={DummyImageCategory} alt="" />
-                                </div>
-                                <h3 className="category__title">Animals</h3>
-                                <span className="category__value">322</span>
-                            </a>
-                        </div>
-
-                        <div className="col-12 col-sm-6 col-lg-4 col-xl-3">
-                            <a href="category.html" className="category">
-                                <div className="category__cover">
-                                    <img src={DummyImageCategory} alt="" />
-                                </div>
-                                <h3 className="category__title">Comedy</h3>
-                                <span className="category__value">174</span>
-                            </a>
-                        </div>
-
-                        <div className="col-12 col-sm-6 col-lg-4 col-xl-3">
-                            <a href="category.html" className="category">
-                                <div className="category__cover">
-                                    <img src={DummyImageCategory} alt="" />
-                                </div>
-                                <h3 className="category__title">Documentary</h3>
-                                <span className="category__value">509</span>
-                            </a>
-                        </div>
-
-                        <div className="col-12 col-sm-6 col-lg-4 col-xl-3">
-                            <a href="category.html" className="category">
-                                <div className="category__cover">
-                                    <img src={DummyImageCategory} alt="" />
-                                </div>
-                                <h3 className="category__title">History</h3>
-                                <span className="category__value">1 228</span>
-                            </a>
-                        </div>
-
-                        <div className="col-12 col-sm-6 col-lg-4 col-xl-3">
-                            <a href="category.html" className="category">
-                                <div className="category__cover">
-                                    <img src={DummyImageCategory} alt="" />
-                                </div>
-                                <h3 className="category__title">Horror</h3>
-                                <span className="category__value">1 025</span>
-                            </a>
-                        </div>
-
-                        <div className="col-12 col-sm-6 col-lg-4 col-xl-3">
-                            <a href="category.html" className="category">
-                                <div className="category__cover">
-                                    <img src={DummyImageCategory} alt="" />
-                                </div>
-                                <h3 className="category__title">Science Fiction</h3>
-                                <span className="category__value">819</span>
-                            </a>
-                        </div>
-
-                        <div className="col-12 col-sm-6 col-lg-4 col-xl-3">
-                            <a href="category.html" className="category">
-                                <div className="category__cover">
-                                    <img src={DummyImageCategory} alt="" />
-                                </div>
-                                <h3 className="category__title">Travel</h3>
-                                <span className="category__value">3 601</span>
-                            </a>
-                        </div>
-
-                        <div className="col-12 col-sm-6 col-lg-4 col-xl-3">
-                            <a href="category.html" className="category">
-                                <div className="category__cover">
-                                    <img src={DummyImageCategory} alt="" />
-                                </div>
-                                <h3 className="category__title">Western</h3>
-                                <span className="category__value">745</span>
-                            </a>
-                        </div>
+                        {genres.length > 0 && genres.map(genre =>
+                            (<Category title={genre.name} id={genre.id}/>))
+                        }
                     </div>
                 </div>
             </section>

@@ -5,12 +5,11 @@ import { useAuth } from '../services/Auth'
 export default function PrivateRoute({ component: Component, ...rest }) {
     const { currentUser } = useAuth();
 
-    console.log({ currentUser });
+    console.log(currentUser);
     return (
-        <Route
-            {...rest}
+        <Route {...rest}
             render={props => {
-                return { currentUser } ? <Component {...props} /> : <Redirect to="/signin" />
+                return currentUser ? <Component {...props} /> : <Redirect to="/signin" />
             }}
         />
     )

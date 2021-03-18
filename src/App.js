@@ -8,15 +8,15 @@ import PrivateRoute from './components/PrivateRoute'
 
 function App() {
   return (
-    <Router>
-      <AuthProvider>
+    <AuthProvider>
+      <Router>
         <Switch>
-          <PrivateRoute exact path="/" component={Layout}/>
-          <Route exact path="/signin" component={SignIn}/>
-          <Route exact path="/signup" component={SignUp}/>
+          <PrivateRoute exact path="/" component={Layout} />
+          <Route exact path="/signin" component={SignIn} />
+          <Route exact path="/signup" component={SignUp} />
         </Switch>
-      </AuthProvider>
-    </Router>
+      </Router>
+    </AuthProvider>
   );
 }
 
