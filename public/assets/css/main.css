@@ -994,6 +994,7 @@ body::-webkit-scrollbar-thumb {
 	Section
 ==============================*/
 .section {
+  margin-top: 100px;
   padding: 60px 0;
   position: relative;
   overflow: hidden;
