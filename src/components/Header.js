@@ -4,7 +4,7 @@ import { Link, useHistory } from 'react-router-dom'
 
 export default function Header() {
     const { logout } = useAuth();
-    const [error, setError] = useState("");
+    const [error, setError] = useState();
     const history = useHistory();
 
     function handleLogout(e) {
@@ -30,13 +30,13 @@ export default function Header() {
                             </a>
                             <ul className="header__nav">
                                 <li className="header__nav-item">
-                                    <a className="header__nav-link" href="/">Favorites</a>
+                                    <Link className="header__nav-link" to="/catalog">Catalog</Link>
                                 </li>
                                 <li className="header__nav-item">
-                                    <a className="header__nav-link" href="/">About us</a>
+                                    <Link className="header__nav-link" to="/watchlist">Watchlist</Link>
                                 </li>
                                 <li className="header__nav-item">
-                                    <a className="header__nav-link" href="/">About us</a>
+                                    <Link className="header__nav-link" to="/favorites">Favorites</Link>
                                 </li>
                             </ul>
                             <div className="header__actions">
