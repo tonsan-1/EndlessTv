@@ -37,11 +37,11 @@ export default function Home() {
                 <div class="container">
                     <div class="row">
                         <div class="col-12">
-                            <h2 class="section__title">Popular</h2>
+                            <h2 class="section__title">Popular Movies</h2>
                         </div>
                         <div class="col-12">
                             <OwlCarousel options={options}>
-                                {popular.length > 0 ? popular.map(movie => <HomeMovieCard movie={movie} key={movie.id}/> ):""}
+                                {popular.length > 0 ? popular.map(movie => <HomeMovieCard movie={movie} key={movie.id} />) : ""}
                             </OwlCarousel>
                         </div>
                     </div>

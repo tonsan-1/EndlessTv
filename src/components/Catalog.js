@@ -12,6 +12,7 @@ export default function Catalog() {
             .then((data) => {
                 if (!data.errors) {
                     setGenres(data.genres)
+                    console.log(data.genres)
                 } else {
                     setGenres([])
                 }
