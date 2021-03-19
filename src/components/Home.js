@@ -3,12 +3,20 @@ import { GetPopularMovies } from '../services/Fetcher'
 import Header from './Header'
 import HomeMovieCard from './HomeMovieCard'
 
-import OwlCarousel from 'react-owl-carousel';
+import OwlCarousel from 'react-owl-carousel2';
 import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
 
 export default function Home() {
     const [popular, setPopular] = useState([]);
+
+    const options = {
+        items: 6,
+        margin: 15,
+        slideBy: 3,
+        lazyLoad: true,
+        rewind: true,
+    }
 
     useEffect(() => {
         GetPopularMovies()
@@ -32,10 +40,9 @@ export default function Home() {
                             <h2 class="section__title">Popular</h2>
                         </div>
                         <div class="col-12">
-                                <OwlCarousel margin={15} items={6} >
-                                    {popular.length > 0 && popular.map(movie => <HomeMovieCard movie={movie}/>)
-                                    }
-                                </OwlCarousel>
+                            <OwlCarousel options={options}>
+                                {popular.length > 0 ? popular.map(movie => <HomeMovieCard movie={movie} key={movie.id}/> ):""}
+                            </OwlCarousel>
                         </div>
                     </div>
                 </div>
