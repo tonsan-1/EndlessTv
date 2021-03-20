@@ -2,43 +2,53 @@ import React, { useState, useEffect } from 'react'
 import { GetMovieGenres } from '../../services/Fetcher'
 import CatalogGenreCard from '../Catalog/CatalogGenreCard'
 import Header from '../Header'
+import FullPageSpinner from '../FullPageSpinner'
+
 
 export default function Catalog() {
     const [genres, setGenres] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
+        setLoading(true)
+
         GetMovieGenres()
             .then((res) => res.json())
             .then((data) => {
-                if (!data.errors) {
-                    setGenres(data.genres)
-                } else {
-                    setGenres([])
-                }
+                setGenres(data.genres)
+
+                setTimeout(() => {
+                    setLoading(false)
+                }, 600)
             })
     }, [])
 
     return (
         <div>
-            <Header/>
-            <section className="section section--head section--head-fixed">
-                <div className="container">
-                    <div className="row">
-                        <div className="col-12 col-xl-6">
-                            <h1 className="section__title section__title--head">Catalog</h1>
+            <Header />
+
+            {loading ? <FullPageSpinner /> :
+                <div>
+                    <section className="section section--head section--head-fixed">
+                        <div className="container">
+                            <div className="row">
+                                <div className="col-12 col-xl-6">
+                                    <h1 className="section__title section__title--head">Catalog</h1>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-            </section>
-            <section className="section section--pb0">
-                <div className="container">
-                    <div className="row row--grid">
-                        {genres.length > 0 && genres.map(genre =>
-                            (<CatalogGenreCard title={genre.name} id={genre.id} key={genre.id}/>))
-                        }
-                    </div>
-                </div>
-            </section>
+                    </section>
+                    <section className="section section--pb0">
+                        <div className="container">
+                            <div className="row row--grid">
+                                {genres.length > 0 && genres.map(genre =>
+                                    (<CatalogGenreCard title={genre.name} id={genre.id} key={genre.id} />))
+                                }
+                            </div>
+                        </div>
+                    </section>
+                </div>}
         </div>
+
     )
 }

@@ -3,6 +3,7 @@ import { GetPopularMovies, GetTopMoviesOfAllTime } from '../../services/Fetcher'
 import Header from '../Header'
 import Footer from '../Footer'
 import HomeMovieCard from '../Home/HomeMovieCard'
+import FullPageSpinner from '../FullPageSpinner'
 
 import OwlCarousel from 'react-owl-carousel2';
 import 'owl.carousel/dist/assets/owl.carousel.css';
@@ -19,50 +20,64 @@ const options = {
 export default function Home() {
     const [popular, setPopular] = useState([]);
     const [topMovies, setTopMovies] = useState([]);
+    const [loading, setLoading] = useState(false);
+
 
     useEffect(() => {
+        setLoading(true)
+
         GetPopularMovies().then(res => res.json())
             .then(data => {
-                if (!data.errors) { setPopular(data.results) } else { setPopular([]) }
+                setPopular(data.results)
             })
 
         GetTopMoviesOfAllTime().then(res => res.json())
             .then(data => {
-                if (!data.errors) { setTopMovies(data.results) } else { setTopMovies([]) }
+                setTopMovies(data.results)
+
+                setTimeout(() => {
+                    setLoading(false)
+                }, 600)
             })
     }, [])
 
     return (
         <div>
             <Header />
-            <section class="section">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12">
-                            <h2 class="section__title">Popular Movies</h2>
-                        </div>
-                        <div class="col-12">
-                            <div class="section__carousel-wrap">
-                                <OwlCarousel options={options}>
-                                    {popular.length > 0 ? popular.map(movie => <HomeMovieCard movie={movie} key={movie.id} />) : ""}
-                                </OwlCarousel>
-                            </div>
-                        </div>
 
-                        <div class="col-12">
-                            <h2 class="section__title">All Time Classics</h2>
-                        </div>
-                        <div class="col-12">
-                            <div class="section__carousel-wrap">
-                                <OwlCarousel options={options}>
-                                    {topMovies.length > 0 ? topMovies.map(movie => <HomeMovieCard movie={movie} key={movie.id} />) : ""}
-                                </OwlCarousel>
+            {loading ? <FullPageSpinner /> :
+
+                <div>
+                    <section class="section">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12">
+                                    <h2 class="section__title">Popular Movies</h2>
+                                </div>
+                                <div class="col-12">
+                                    <div class="section__carousel-wrap">
+                                        <OwlCarousel options={options}>
+                                            {popular.length > 0 ? popular.map(movie => <HomeMovieCard movie={movie} key={movie.id} />) : ""}
+                                        </OwlCarousel>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <h2 class="section__title">All Time Classics</h2>
+                                </div>
+                                <div class="col-12">
+                                    <div class="section__carousel-wrap">
+                                        <OwlCarousel options={options}>
+                                            {topMovies.length > 0 ? topMovies.map(movie => <HomeMovieCard movie={movie} key={movie.id} />) : ""}
+                                        </OwlCarousel>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </section>
+                    <Footer />
                 </div>
-            </section>
-            <Footer />
+            }
         </div>
     )
 }

@@ -28,7 +28,7 @@ export default function Category(props) {
 
                 setTimeout(() => {
                     setLoading(false)
-                }, 500)
+                }, 300)
             })
     }, [genre, currentGenreId, props.match.params.currentPage, currentPage])
 
