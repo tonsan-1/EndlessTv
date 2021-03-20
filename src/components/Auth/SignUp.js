@@ -1,12 +1,13 @@
 import React, { useRef, useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
-import { useAuth } from '../services/Auth'
+import { useAuth } from '../../services/Auth'
 import { Alert } from 'react-bootstrap'
 
 export default function SignUp() {
     const emailRef = useRef();
     const passwordRef = useRef();
-    const { login } = useAuth();
+    const passwordConfirmRef = useRef();
+    const { signup } = useAuth();
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
     const history = useHistory();
@@ -15,7 +16,12 @@ export default function SignUp() {
     function handleSubmit(e) {
         e.preventDefault()
 
-        login(emailRef.current.value, passwordRef.current.value)
+        if (passwordRef.current.value !==
+            passwordConfirmRef.current.value) {
+            return setError('Passwords do not match!')
+        }
+
+        signup(emailRef.current.value, passwordRef.current.value)
             .then(res => {
                 setError('');
                 setLoading(true);
@@ -27,6 +33,7 @@ export default function SignUp() {
 
         setLoading(false);
     }
+
     return (
         <div className="sign section--full-bg">
             <div className="container">
@@ -37,9 +44,7 @@ export default function SignUp() {
                                 <a href="index.html" className="sign__logo">
                                     EndlessTV
                                 </a>
-
                                 {error && <Alert variant="danger">{error}</Alert>}
-
                                 <div className="sign__group">
                                     <input type="text" ref={emailRef} required className="sign__input" placeholder="Email" />
                                 </div>
@@ -48,11 +53,13 @@ export default function SignUp() {
                                     <input type="password" ref={passwordRef} required className="sign__input" placeholder="Password" />
                                 </div>
 
-                                <button disabled={loading} className="sign__btn" type="submit">Sign in</button>
+                                <div className="sign__group">
+                                    <input type="password" ref={passwordConfirmRef} required className="sign__input" placeholder="Confirm Password" />
+                                </div>
 
-                                <span className="sign__text">Don't have an account? <Link to="/signup">Sign up!</Link></span>
+                                <button disabled={loading} className="sign__btn" type="submit">Sign up</button>
 
-                                <span className="sign__text"><a href="forgot.html">Forgot password?</a></span>
+                                <span className="sign__text">Already have an account? <Link to="/signin">Sign in!</Link></span>
                             </form>
                         </div>
                     </div>

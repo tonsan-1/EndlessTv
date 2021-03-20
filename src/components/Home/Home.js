@@ -1,24 +1,24 @@
 import React, { useState, useEffect } from 'react'
-import { GetPopularMovies, GetTopMoviesOfAllTime } from '../services/Fetcher'
-import Header from './Header'
-import Footer from './Footer'
-import HomeMovieCard from './HomeMovieCard'
+import { GetPopularMovies, GetTopMoviesOfAllTime } from '../../services/Fetcher'
+import Header from '../Header'
+import Footer from '../Footer'
+import HomeMovieCard from '../Home/HomeMovieCard'
 
 import OwlCarousel from 'react-owl-carousel2';
 import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
 
+const options = {
+    items: 5,
+    margin: 15,
+    slideBy: 3,
+    lazyLoad: true,
+    rewind: true
+}
+
 export default function Home() {
     const [popular, setPopular] = useState([]);
     const [topMovies, setTopMovies] = useState([]);
-
-    const options = {
-        items: 5,
-        margin: 15,
-        slideBy: 3,
-        lazyLoad: true,
-        rewind: true
-    }
 
     useEffect(() => {
         GetPopularMovies().then(res => res.json())

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { GetMovieGenres } from '../services/Fetcher'
-import CatalogGenreCard from './CatalogGenreCard'
-import Header from './Header'
+import { GetMovieGenres } from '../../services/Fetcher'
+import CatalogGenreCard from '../Catalog/CatalogGenreCard'
+import Header from '../Header'
 
 export default function Catalog() {
     const [genres, setGenres] = useState([]);
@@ -12,7 +12,6 @@ export default function Catalog() {
             .then((data) => {
                 if (!data.errors) {
                     setGenres(data.genres)
-                    console.log(data.genres)
                 } else {
                     setGenres([])
                 }
@@ -35,7 +34,7 @@ export default function Catalog() {
                 <div className="container">
                     <div className="row row--grid">
                         {genres.length > 0 && genres.map(genre =>
-                            (<CatalogGenreCard title={genre.name} id={genre.id}/>))
+                            (<CatalogGenreCard title={genre.name} id={genre.id} key={genre.id}/>))
                         }
                     </div>
                 </div>

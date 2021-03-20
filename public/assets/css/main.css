@@ -1003,8 +1003,11 @@ body::-webkit-scrollbar-thumb {
 .section--pb0 {
   padding-top: 0px;
 }
+.section.section--head {
+  margin-top: 120px;
+}
 .section--head {
-  margin-top: 80px;
+  margin-top: 120px;
   padding-top: 30px;
   padding-bottom: 0;
   border-top: 1px solid #151f30;
@@ -1403,6 +1406,7 @@ body::-webkit-scrollbar-thumb {
   text-transform: uppercase;
   font-weight: 500;
 }
+
 .catalog__more:hover {
   color: #fff;
   background-color: #2f80ed;
