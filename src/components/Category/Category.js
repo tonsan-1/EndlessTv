@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { GetMovieGenres, GetMoviesByGenreAndCurrentPage } from '../../services/Fetcher'
 import CategoryMovieCard from './CategoryMovieCard'
 import Header from '../Header'
+import Spinner from 'react-bootstrap/Spinner'
 
 
 export default function Category(props) {
@@ -11,8 +12,12 @@ export default function Category(props) {
     const [currentGenreId, setCurrentGenreId] = useState("");
     const [currentMovies, setCurrentMovies] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
+        setLoading(true)
+        setCurrentPage(parseInt(props.match.params.currentPage))
+
         GetMovieGenres()
             .then((res) => res.json())
             .then((data) => {
@@ -22,22 +27,17 @@ export default function Category(props) {
                     setCurrentGenreId([])
                 }
             })
-    }, [genre, currentGenreId])
 
-    useEffect(() => {
-        setCurrentPage(parseInt(props.match.params.currentPage))
-    }, [props.match.params.currentPage])
-
-    useEffect(() => {
         GetMoviesByGenreAndCurrentPage(currentGenreId, currentPage).then(res => res.json())
             .then(data => {
                 if (!data.errors) {
                     setCurrentMovies(data.results)
+                    setLoading(false)
                 } else {
                     setCurrentMovies([])
                 }
             })
-    }, [currentGenreId, currentPage])
+    }, [genre, currentGenreId, props.match.params.currentPage, currentPage])
 
     return (
         <div>
@@ -51,8 +51,6 @@ export default function Category(props) {
                     </div>
                 </div>
             </section>
-
-
 
             <div className="catalog catalog--page">
                 <div className="container">
