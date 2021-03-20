@@ -36,19 +36,19 @@ export default function Category(props) {
         <div>
             <Header />
 
+            <section className="section section--head">
+                <div className="container">
+                    <div className="row">
+                        <div className="col-12 col-xl-6">
+                            <h1 className="section__title section__title--head">{genre + ' Movies'}</h1>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             {loading ? <FullPageSpinner /> :
 
                 <div>
-                    <section className="section section--head">
-                        <div className="container">
-                            <div className="row">
-                                <div className="col-12 col-xl-6">
-                                    <h1 className="section__title section__title--head">{genre + ' Movies'}</h1>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-
                     <div className="catalog catalog--page">
                         <div className="container">
                             <div className="row">

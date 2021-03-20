@@ -29,15 +29,6 @@ export default function Catalog() {
 
             {loading ? <FullPageSpinner /> :
                 <div>
-                    <section className="section section--head section--head-fixed">
-                        <div className="container">
-                            <div className="row">
-                                <div className="col-12 col-xl-6">
-                                    <h1 className="section__title section__title--head">Catalog</h1>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
                     <section className="section section--pb0">
                         <div className="container">
                             <div className="row row--grid">
@@ -49,6 +40,5 @@ export default function Catalog() {
                     </section>
                 </div>}
         </div>
-
     )
 }
