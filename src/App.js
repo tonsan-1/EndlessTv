@@ -8,6 +8,7 @@ import SignUp from './components/Auth/SignUp'
 import Home from './components/Home/Home'
 import Catalog from './components/Catalog/Catalog'
 import Category from './components/Category/Category'
+import Details from './components/Details/Details'
 
 
 function App() {
@@ -19,7 +20,7 @@ function App() {
           <PrivateRoute exact path="/" component={Home} />
           <PrivateRoute exact path="/catalog" component={Catalog} />
           <PrivateRoute exact path="/categories/:title/:currentPage" component={Category} />
-
+          <PrivateRoute exact path="/details/:id" component={Details} />
           <Route exact path="/signin" component={SignIn} />
           <Route exact path="/signup" component={SignUp} />
         </Switch>

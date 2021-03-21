@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { GetPopularMovies, GetTopMoviesOfAllTime } from '../../services/Fetcher'
 import Header from '../Header'
-import Footer from '../Footer'
 import HomeMovieCard from '../Home/HomeMovieCard'
 import FullPageSpinner from '../FullPageSpinner'
 
@@ -75,7 +74,6 @@ export default function Home() {
                             </div>
                         </div>
                     </section>
-                    <Footer />
                 </div>
             }
         </div>
