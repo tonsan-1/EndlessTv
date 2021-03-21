@@ -19,8 +19,8 @@ export default function Details(props) {
     const [movieGenres, setMovieGenres] = useState([]);
     const [loading, setLoading] = useState(false);
     const backgroundStyle = {
-        background : `url(https://image.tmdb.org/t/p/original${movieDetails.background})`,
-        "background-size" : "cover"
+        background: `url(https://image.tmdb.org/t/p/original${movieDetails.background})`,
+        "background-size": "cover",
     }
 
     useEffect(() => {
@@ -43,7 +43,7 @@ export default function Details(props) {
 
                 setTimeout(() => {
                     setLoading(false)
-                }, 500)
+                }, 400)
             })
 
     }, [currentMovieId])
@@ -56,9 +56,7 @@ export default function Details(props) {
 
 
                 <section className="section section--head section--head-fixed section--gradient section--details-bg">
-                    <div  className="section__bg" style={backgroundStyle}>
-                        {/* <img  src={`https://image.tmdb.org/t/p/original${movieDetails.background}`} alt="" /> */}
-                    </div>
+                    <div className="section__bg" style={backgroundStyle} />
                     <div className="container">
                         <div className="article">
                             <div className="row">
