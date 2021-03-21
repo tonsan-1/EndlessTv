@@ -10,7 +10,6 @@ import Catalog from './components/Catalog/Catalog'
 import Category from './components/Category/Category'
 import Details from './components/Details/Details'
 
-
 function App() {
   return (
     <AuthProvider>
