@@ -32,11 +32,11 @@ export default function Details(props) {
                 setMovieDetails({
                     "title": data.title,
                     "vote_average": data.vote_average,
-                    "genre": data.genres[0].name,
                     "release_date": data.release_date.substring(0, 4),
                     "duration": timeConvert(data.runtime),
                     "overview": data.overview,
-                    "background": data.backdrop_path
+                    "background": data.backdrop_path,
+                    "imdb_id" : data.imdb_id
                 })
 
                 setMovieGenres(data.genres)
@@ -73,7 +73,6 @@ export default function Details(props) {
                                             <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22,9.67A1,1,0,0,0,21.14,9l-5.69-.83L12.9,3a1,1,0,0,0-1.8,0L8.55,8.16,2.86,9a1,1,0,0,0-.81.68,1,1,0,0,0,.25,1l4.13,4-1,5.68A1,1,0,0,0,6.9,21.44L12,18.77l5.1,2.67a.93.93,0,0,0,.46.12,1,1,0,0,0,.59-.19,1,1,0,0,0,.4-1l-1-5.68,4.13-4A1,1,0,0,0,22,9.67Zm-6.15,4a1,1,0,0,0-.29.88l.72,4.2-3.76-2a1.06,1.06,0,0,0-.94,0l-3.76,2,.72-4.2a1,1,0,0,0-.29-.88l-3-3,4.21-.61a1,1,0,0,0,.76-.55L12,5.7l1.88,3.82a1,1,0,0,0,.76.55l4.21.61Z" /></svg>
                                                 {movieDetails.vote_average}
                                             </li>
-                                            <li>{movieDetails.genre}</li>
                                             <li>{movieDetails.release_date}</li>
                                             <li>{movieDetails.duration}</li>
                                         </ul>
@@ -85,17 +84,7 @@ export default function Details(props) {
                                 </div>
 
                                 <div className="col-12 col-xl-8">
-                                    <video controls crossorigin playsinline poster="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg" id="player">
-                                        <source src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-576p.mp4" type="video/mp4" size="576" />
-                                        <source src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-720p.mp4" type="video/mp4" size="720" />
-                                        <source src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-1080p.mp4" type="video/mp4" size="1080" />
-
-                                        <track kind="captions" label="English" srclang="en" src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.en.vtt"
-                                            default />
-                                        <track kind="captions" label="Français" srclang="fr" src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.fr.vtt" />
-
-                                        <a href="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-576p.mp4" download>Download</a>
-                                    </video>
+                                    <iframe src={`http://databasegdriveplayer.co/player.php?imdb=${movieDetails.imdb_id}`} title="myiFrame" scrolling="no" frameborder="0" marginheight="0px" marginwidth="0px" height="400px" width="700px" allowfullscreen></iframe>
                                 </div>
 
                                 <div className="col-12 col-xl-8">
