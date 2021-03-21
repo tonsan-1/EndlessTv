@@ -1,6 +1,7 @@
 import React from 'react'
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import PrivateRoute from './components/Auth/PrivateRoute'
+import ScrollToTop from './components/ScrollToTop'
 import { AuthProvider } from './services/Auth'
 import SignIn from './components/Auth/SignIn'
 import SignUp from './components/Auth/SignUp'
@@ -8,10 +9,12 @@ import Home from './components/Home/Home'
 import Catalog from './components/Catalog/Catalog'
 import Category from './components/Category/Category'
 
+
 function App() {
   return (
     <AuthProvider>
       <Router>
+        <ScrollToTop/>
         <Switch>
           <PrivateRoute exact path="/" component={Home} />
           <PrivateRoute exact path="/catalog" component={Catalog} />
