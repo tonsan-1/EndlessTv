@@ -1,0 +1,139 @@
+/*==============================
+	Fonts
+==============================*/
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Rubik:ital,wght@0,300;0,400;0,500;1,400&display=swap");
+/*==============================
+	Common styles
+==============================*/
+html {
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+html,
+body {
+  height: 100%;
+}
+body {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  background-color: #131720;
+  -webkit-font-smoothing: antialiased;
+}
+button {
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  transition: 0.5s;
+  transition-property: color, background-color, border-color;
+  cursor: pointer;
+}
+button:focus {
+  outline: none;
+}
+a {
+  transition: 0.5s;
+  transition-property: color, background-color, border-color;
+}
+a:hover,
+a:active,
+a:focus {
+  outline: none;
+  text-decoration: none;
+}
+input,
+textarea,
+select {
+  padding: 0;
+  margin: 0;
+  border-radius: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  box-shadow: none;
+  transition: 0.5s;
+  transition-property: color, border-color;
+}
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+}
+select::-ms-expand {
+  display: none;
+}
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+::-moz-selection {
+  background: #fff;
+  color: #151f30;
+  text-shadow: none;
+}
+::selection {
+  background: #fff;
+  color: #151f30;
+  text-shadow: none;
+}
+::-webkit-input-placeholder {
+  color: #f2f2f2;
+  opacity: 1;
+}
+::-moz-placeholder {
+  color: #f2f2f2;
+  opacity: 1;
+}
+:-moz-placeholder {
+  color: #f2f2f2;
+  opacity: 1;
+}
+:-ms-input-placeholder {
+  color: #f2f2f2;
+  opacity: 1;
+}
+:focus {
+  outline: -webkit-focus-ring-color auto 0px;
+}
+body::-webkit-scrollbar {
+  width: 16px;
+}
+body::-webkit-scrollbar-track {
+  background: #151f30;
+}
+body::-webkit-scrollbar-thumb {
+  background-color: #2f80ed;
+  outline: 1px solid #151f30;
+}
+@media (min-width: 1440px) {
+  .container {
+    max-width: 1330px;
+  }
+}
+.table-responsive {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.tab-content {
+  width: 100%;
+}
+.tab-content > .tab-pane {
+  display: none;
+}
+.tab-content > .active {
+  display: block;
+}
+.fade {
+  transition: opacity 0.4s linear;
+}
+@media screen and (prefers-reduced-motion: reduce) {
+  .fade {
+    transition: none;
+  }
+}
+.fade:not(.show) {
+  opacity: 0;
+}

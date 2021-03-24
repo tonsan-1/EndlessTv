@@ -10,6 +10,8 @@ import Category from './components/Category/Category'
 import ScrollToTop from './components/ScrollToTop'
 import PrivateRoute from './components/Auth/PrivateRoute'
 
+import './App.css'
+
 function App() {
   return (
     <AuthProvider>
