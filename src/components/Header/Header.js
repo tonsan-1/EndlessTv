@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useAuth } from '../../services/Auth'
 import { Link, useHistory } from 'react-router-dom'
 
@@ -6,7 +6,6 @@ import './Header.css'
 
 export default function Header() {
     const { logout } = useAuth();
-    const [error, setError] = useState();
     const history = useHistory();
 
     function handleLogout(e) {
@@ -14,12 +13,9 @@ export default function Header() {
 
         logout()
             .then(res => {
-                setError('');
                 history.push('/signin')
             })
-            .catch(error => {
-                setError(error.message)
-            })
+            
     }
     return (
         <header className="header header--hidden">
