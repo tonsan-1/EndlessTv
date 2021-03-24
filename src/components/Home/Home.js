@@ -21,7 +21,6 @@ export default function Home() {
     const [topMovies, setTopMovies] = useState([]);
     const [loading, setLoading] = useState(false);
 
-
     useEffect(() => {
         setLoading(true)
 

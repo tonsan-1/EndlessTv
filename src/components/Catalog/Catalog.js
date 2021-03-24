@@ -15,6 +15,7 @@ export default function Catalog() {
         GetMovieGenres()
             .then((res) => res.json())
             .then((data) => {
+                console.log(data.genres);
                 setGenres(data.genres)
 
                 setTimeout(() => {
@@ -33,7 +34,7 @@ export default function Catalog() {
                         <div className="container">
                             <div className="row row--grid">
                                 {genres.length > 0 && genres.map(genre =>
-                                    (<CatalogGenreCard title={genre.name} id={genre.id} key={genre.id} />))
+                                    (<CatalogGenreCard genre={genre} key={genre.id} />))
                                 }
                             </div>
                         </div>

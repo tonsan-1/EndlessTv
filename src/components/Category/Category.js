@@ -1,28 +1,22 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { GetMovieGenres, GetMoviesByGenreAndCurrentPage } from '../../services/Fetcher'
+import { GetMoviesByGenreAndCurrentPage } from '../../services/Fetcher'
 import CategoryMovieCard from './CategoryMovieCard'
 import Header from '../Header'
 import FullPageSpinner from '../FullPageSpinner'
 
 
 export default function Category(props) {
-    const currentGenreName = props.match.params.title.charAt(0).toUpperCase() + props.match.params.title.slice(1);
-    const genre = currentGenreName === 'Science fiction' ? 'Science Fiction' : currentGenreName;
-    const [currentGenreId, setCurrentGenreId] = useState("");
+    const currentPage = parseInt(props.match.params.currentPage);
+    const genreId = props.match.params.genreId;
+    const genreName = props.match.params.genreName;
     const [currentMovies, setCurrentMovies] = useState([]);
-    const [currentPage, setCurrentPage] = useState(1);
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         setLoading(true)
-        setCurrentPage(parseInt(props.match.params.currentPage))
 
-        GetMovieGenres()
-            .then((res) => res.json())
-            .then((data) => { setCurrentGenreId(data.genres.find(x => x.name === genre).id) })
-
-        GetMoviesByGenreAndCurrentPage(currentGenreId, currentPage).then(res => res.json())
+        GetMoviesByGenreAndCurrentPage(genreId, currentPage).then(res => res.json())
             .then(data => {
                 setCurrentMovies(data.results.filter(x => x.release_date))
 
@@ -30,24 +24,12 @@ export default function Category(props) {
                     setLoading(false)
                 }, 300)
             })
-    }, [genre, currentGenreId, props.match.params.currentPage, currentPage])
+    }, [genreId, currentPage])
 
     return (
         <div>
             <Header />
-
-            <section className="section section--head">
-                <div className="container">
-                    <div className="row">
-                        <div className="col-12 col-xl-6">
-                            <h1 className="section__title section__title--head">{genre + ' Movies'}</h1>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
             {loading ? <FullPageSpinner /> :
-
                 <div>
                     <div className="catalog catalog--page">
                         <div className="container">
@@ -58,13 +40,13 @@ export default function Category(props) {
 
                                         <ul className="catalog__paginator">
                                             <li>
-                                                <Link to={`/categories/${currentGenreName.toLowerCase()}/${currentPage > 1 ? currentPage - 1 : currentPage}`}>
+                                                <Link to={`/categories/${genreId}/${genreName}/${currentPage > 1 ? currentPage - 1 : currentPage}`}>
                                                     <svg width="14" height="11" viewBox="0 0 14 11" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.75 5.36475L13.1992 5.36475" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" /><path d="M5.771 10.1271L0.749878 5.36496L5.771 0.602051" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" /></svg>
                                                 </Link>
                                             </li>
 
                                             <li>
-                                                <Link to={`/categories/${currentGenreName.toLowerCase()}/${currentPage + 1}`}>
+                                                <Link to={`/categories/${genreId}/${genreName}/${currentPage + 1}`}>
                                                     <svg width="14" height="11" viewBox="0 0 14 11" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13.1992 5.3645L0.75 5.3645" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" /><path d="M8.17822 0.602051L13.1993 5.36417L8.17822 10.1271" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" /></svg>
                                                 </Link>
                                             </li>
@@ -88,13 +70,13 @@ export default function Category(props) {
 
                                                 <ul className="catalog__paginator">
                                                     <li>
-                                                        <Link to={`/categories/${currentGenreName.toLowerCase()}/${currentPage > 1 ? currentPage - 1 : currentPage}`}>
+                                                        <Link to={`/categories/${genreId}/${genreName}/${currentPage > 1 ? currentPage - 1 : currentPage}`}>
                                                             <svg width="14" height="11" viewBox="0 0 14 11" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.75 5.36475L13.1992 5.36475" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" /><path d="M5.771 10.1271L0.749878 5.36496L5.771 0.602051" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" /></svg>
                                                         </Link>
                                                     </li>
 
                                                     <li>
-                                                        <Link to={`/categories/${currentGenreName.toLowerCase()}/${currentPage + 1}`}>
+                                                        <Link to={`/categories/${genreId}/${genreName}/${currentPage + 1}`}>
                                                             <svg width="14" height="11" viewBox="0 0 14 11" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13.1992 5.3645L0.75 5.3645" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" /><path d="M8.17822 0.602051L13.1993 5.36417L8.17822 10.1271" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" /></svg>
                                                         </Link>
                                                     </li>
