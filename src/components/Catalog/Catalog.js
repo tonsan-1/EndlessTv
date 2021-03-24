@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { GetMovieGenres } from '../../services/movieService'
+import { movieService } from '../../services/movieService'
 import CatalogGenreCard from '../Catalog/CatalogGenreCard'
 import Header from '../Header/Header'
 import FullPageSpinner from '../Spinner/FullPageSpinner'
@@ -14,15 +14,11 @@ export default function Catalog() {
     useEffect(() => {
         setLoading(true)
 
-        GetMovieGenres()
-            .then((res) => res.json())
+        movieService.getAllMovieGenres()
             .then((data) => {
-                console.log(data.genres);
                 setGenres(data.genres)
 
-                setTimeout(() => {
-                    setLoading(false)
-                }, 600)
+                setLoading(false)
             })
     }, [])
 

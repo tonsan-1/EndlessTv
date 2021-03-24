@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { GetMoviesByGenreAndCurrentPage } from '../../services/movieService'
+import { movieService } from '../../services/movieService'
 import CategoryMovieCard from './CategoryMovieCard'
 import Header from '../Header/Header'
 import FullPageSpinner from '../Spinner/FullPageSpinner'
@@ -17,14 +17,12 @@ export default function Category(props) {
     useEffect(() => {
         setLoading(true)
 
-        GetMoviesByGenreAndCurrentPage(genreId, currentPage).then(res => res.json())
+        movieService.getMoviesByGenreAndCurrentPage(genreId, currentPage)
             .then(data => {
                 setCurrentMovies(
                     data.results.filter(x => x.release_date && x.backdrop_path && x.poster_path))
 
-                setTimeout(() => {
-                    setLoading(false)
-                }, 300)
+                setLoading(false)
             })
     }, [genreId, currentPage])
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { GetPopularMovies, GetTopMoviesOfAllTime } from '../../services/movieService'
+import { movieService } from '../../services/movieService'
 import Header from '../Header/Header'
 import HomeMovieCard from '../Home/HomeMovieCard'
 import FullPageSpinner from '../Spinner/FullPageSpinner'
@@ -20,22 +20,19 @@ export default function Home() {
     const [popular, setPopular] = useState([]);
     const [topMovies, setTopMovies] = useState([]);
     const [loading, setLoading] = useState(false);
-
+    
     useEffect(() => {
         setLoading(true)
 
-        GetPopularMovies().then(res => res.json())
+        movieService.getPopularMovies()
             .then(data => {
                 setPopular(data.results)
             })
 
-        GetTopMoviesOfAllTime().then(res => res.json())
+        movieService.getTopClassicsMoviesOfAllTime()
             .then(data => {
                 setTopMovies(data.results)
-
-                setTimeout(() => {
-                    setLoading(false)
-                }, 600)
+                setLoading(false)
             })
     }, [])
 
