@@ -9,6 +9,7 @@ import Catalog from './components/Catalog/Catalog'
 import Category from './components/Category/Category'
 import ScrollToTop from './components/ScrollToTop'
 import PrivateRoute from './components/PrivateRoute'
+import Search from './components/Search/Search'
 
 import './App.css'
 
@@ -24,6 +25,7 @@ function App() {
           <PrivateRoute exact path="/catalog" component={Catalog} />
           <PrivateRoute exact path="/categories/:genreId/:genreName/:currentPage" component={Category} />
           <PrivateRoute exact path="/details/:id" component={Details} />
+          <PrivateRoute exact path="/search/:searchInput" component={Search} />
         </Switch>
       </Router>
     </AuthProvider>

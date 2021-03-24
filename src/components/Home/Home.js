@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { GetPopularMovies, GetTopMoviesOfAllTime } from '../../services/Fetcher'
+import { GetPopularMovies, GetTopMoviesOfAllTime } from '../../services/movieService'
 import Header from '../Header/Header'
 import HomeMovieCard from '../Home/HomeMovieCard'
 import FullPageSpinner from '../Spinner/FullPageSpinner'

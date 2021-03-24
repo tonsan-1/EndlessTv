@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { GetMovieGenres } from '../../services/Fetcher'
+import { GetMovieGenres } from '../../services/movieService'
 
 export default function HomeMovieCard({ movie }) {
     const [genres, setGenres] = useState([]);

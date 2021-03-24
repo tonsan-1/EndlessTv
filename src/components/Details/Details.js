@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Header from '../Header/Header'
-import { GetMovieDetailsById } from '../../services/Fetcher'
+import { movieService } from '../../services/movieService'
 import FullPageSpinner from '../Spinner/FullPageSpinner'
 
 import './Details.css'
@@ -25,11 +25,11 @@ export default function Details(props) {
         "background-size": "cover",
     }
 
+    
     useEffect(() => {
         setLoading(true)
 
-        GetMovieDetailsById(currentMovieId)
-            .then(res => res.json())
+        movieService.getMovieDetailsById(currentMovieId)
             .then(data => {
                 setMovieDetails({
                     "title": data.title,
