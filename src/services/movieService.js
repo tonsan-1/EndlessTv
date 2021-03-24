@@ -25,6 +25,9 @@ export const movieService = {
     async getMovieDetailsById(id) {
         return await fetch(`${url}movie/${id}?api_key=${apiKey}&language=en-US`)
             .then(res => res.json());
+    },
+    async getMoviesBySearchInput(input) {
+        return await fetch(`${url}search/movie?api_key=${apiKey}&language=en-US&query=${input}&page=1&include_adult=false`)
+            .then(res => res.json());
     }
 }
-

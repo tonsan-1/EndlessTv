@@ -12,10 +12,7 @@ export default function Header() {
     function handleSearch(e) {
         e.preventDefault()
 
-        const searchInput = searchInputRef.current.value.includes(" ") ?
-            searchInputRef.current.value.split(" ").join("+") : searchInputRef.current.value
-
-        history.push(`/search/${searchInput}`)
+        history.push(`/search/${searchInputRef}`)
     }
 
     function handleLogout(e) {
