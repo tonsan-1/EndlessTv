@@ -9,7 +9,7 @@ export default function Category({genre}) {
         GetMoviesByGenre(genre.id)
             .then(res => res.json())
             .then(data => {
-                const currentPosterPath = data.results[5].poster_path;
+                const currentPosterPath = data.results[19].poster_path;
                 if (!data.errors) {
                     setGenrePoster(currentPosterPath);
                 } else {
