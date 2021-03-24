@@ -18,7 +18,8 @@ export default function Category(props) {
 
         GetMoviesByGenreAndCurrentPage(genreId, currentPage).then(res => res.json())
             .then(data => {
-                setCurrentMovies(data.results.filter(x => x.release_date && x.backdrop_path && x.poster_path))
+                setCurrentMovies(
+                    data.results.filter(x => x.release_date && x.backdrop_path && x.poster_path))
 
                 setTimeout(() => {
                     setLoading(false)
