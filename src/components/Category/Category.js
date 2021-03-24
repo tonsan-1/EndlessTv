@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { GetMoviesByGenreAndCurrentPage } from '../../services/Fetcher'
 import CategoryMovieCard from './CategoryMovieCard'
-import Header from '../Header'
+import Header from '../Header/Header'
 import FullPageSpinner from '../FullPageSpinner'
 
 

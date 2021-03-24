@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { GetMovieGenres } from '../../services/Fetcher'
 import CatalogGenreCard from '../Catalog/CatalogGenreCard'
-import Header from '../Header'
+import Header from '../Header/Header'
 import FullPageSpinner from '../FullPageSpinner'
 
 

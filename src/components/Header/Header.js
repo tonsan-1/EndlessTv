@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
-import { useAuth } from '../services/Auth'
+import { useAuth } from '../../services/Auth'
 import { Link, useHistory } from 'react-router-dom'
+
+import './Header.css'
 
 export default function Header() {
     const { logout } = useAuth();

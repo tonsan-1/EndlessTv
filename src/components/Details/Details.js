@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import Header from '../Header'
+import Header from '../Header/Header'
 import { GetMovieDetailsById } from '../../services/Fetcher'
 import FullPageSpinner from '../FullPageSpinner'
 
