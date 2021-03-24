@@ -94,7 +94,7 @@ export default function Details(props) {
                                     <div className="categories">
                                         <h3 className="categories__title">Genres</h3>
                                         {movieGenres.map(genre =>
-                                            <Link to={`/categories/${genre.name.toLowerCase()}/1`} className="categories__item">
+                                            <Link to={`/categories/${genre.id}/${genre.name.toLowerCase()}/1`} className="categories__item">
                                                 {genre.name}
                                             </Link>
                                         )}
