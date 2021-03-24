@@ -8,7 +8,7 @@ import Details from './components/Details/Details'
 import Catalog from './components/Catalog/Catalog'
 import Category from './components/Category/Category'
 import ScrollToTop from './components/ScrollToTop'
-import PrivateRoute from './components/Auth/PrivateRoute'
+import PrivateRoute from './components/PrivateRoute'
 
 import './App.css'
 

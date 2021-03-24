@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { useAuth } from '../../services/Auth'
 import { Alert } from 'react-bootstrap'
+import './Sign.css'
 
 export default function SignUp() {
     const emailRef = useRef();

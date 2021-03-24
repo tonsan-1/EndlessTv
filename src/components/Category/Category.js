@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom'
 import { GetMoviesByGenreAndCurrentPage } from '../../services/Fetcher'
 import CategoryMovieCard from './CategoryMovieCard'
 import Header from '../Header/Header'
-import FullPageSpinner from '../FullPageSpinner'
+import FullPageSpinner from '../Spinner/FullPageSpinner'
 
+import './Category.css'
 
 export default function Category(props) {
     const currentPage = parseInt(props.match.params.currentPage);

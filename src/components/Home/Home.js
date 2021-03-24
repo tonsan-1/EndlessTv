@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react'
 import { GetPopularMovies, GetTopMoviesOfAllTime } from '../../services/Fetcher'
 import Header from '../Header/Header'
 import HomeMovieCard from '../Home/HomeMovieCard'
-import FullPageSpinner from '../FullPageSpinner'
-
+import FullPageSpinner from '../Spinner/FullPageSpinner'
 import OwlCarousel from 'react-owl-carousel2';
 import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
+import './Home.css'
 
 const options = {
     items: 5,
