@@ -14,7 +14,8 @@ export default function Search(props) {
 
         movieService.getMoviesBySearchInput(searchInput)
             .then(data => {
-                setCurrentMovies(data.results.filter(x => 
+                console.log(data);
+                setCurrentMovies(data.results.filter(x =>
                     x.release_date &&
                     x.backdrop_path &&
                     x.poster_path));
@@ -26,7 +27,7 @@ export default function Search(props) {
     return (
         <div>
             <Header />
-            <div className="catalog catalog--page">
+            <div>
                 <div className="container">
                     <div className="row">
                         <div className="col-12">
