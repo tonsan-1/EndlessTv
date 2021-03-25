@@ -73,8 +73,8 @@ export default function Category(props) {
                                         <RangeSlider
                                             tooltipPlacement={'top'}
                                             size={'sm'}
-                                            min={1980}
                                             max={2021}
+                                            min={1980}
                                             value={releaseYear}
                                             onChange={onReleaseYearHandler}
                                         />
