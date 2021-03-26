@@ -4,11 +4,8 @@ import { movieService } from '../../services/movieService'
 import CategoryMovieCard from './CategoryMovieCard'
 import Header from '../Header/Header'
 import FullPageSpinner from '../Spinner/FullPageSpinner'
-
-
 import RangeSlider from 'react-bootstrap-range-slider';
 import 'react-bootstrap-range-slider/dist/react-bootstrap-range-slider.css';
-
 import './Category.css'
 
 export default function Category(props) {
@@ -43,11 +40,7 @@ export default function Category(props) {
 
         movieService.getMoviesByGenreCurrentPageAverageVoteReleaseYear(genreId, currentPage, averageVote, releaseYear)
             .then(data => {
-                console.log(data);
-                setCurrentMovies(
-                    data.results.filter(x =>
-                        x.release_date && x.backdrop_path && x.poster_path)
-                )
+                setCurrentMovies(data.results)
                 setTotalPages(data.total_pages)
 
                 setTimeout(() => {

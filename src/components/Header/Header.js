@@ -12,7 +12,7 @@ export default function Header() {
     function handleSearch(e) {
         e.preventDefault()
 
-        history.push(`/search/${searchInputRef.current.value}`)
+        history.push(`/search/${searchInputRef.current.value}/1`)
     }
 
     function handleLogout(e) {

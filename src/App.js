@@ -25,7 +25,7 @@ function App() {
           <PrivateRoute exact path="/catalog" component={Catalog} />
           <PrivateRoute exact path="/categories/:genreId/:genreName/:currentPage" component={Category} />
           <PrivateRoute exact path="/details/:id" component={Details} />
-          <PrivateRoute exact path="/search/:searchInput" component={Search} />
+          <PrivateRoute exact path="/search/:searchInput/:currentPage" component={Search} />
         </Switch>
       </Router>
     </AuthProvider>
