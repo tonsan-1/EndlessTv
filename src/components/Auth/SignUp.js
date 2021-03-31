@@ -5,6 +5,7 @@ import { Alert } from 'react-bootstrap'
 import './Sign.css'
 
 export default function SignUp() {
+    const nameRef = useRef();
     const emailRef = useRef();
     const passwordRef = useRef();
     const passwordConfirmRef = useRef();
@@ -26,6 +27,14 @@ export default function SignUp() {
             .then(res => {
                 setError('');
                 setLoading(true);
+
+                res.user.updateProfile({
+                    displayName: nameRef.current.value,
+                    photoURL : "https://upload.wikimedia.org/wikipedia/commons/2/24/Missing_avatar.svg"
+                });
+
+                console.log(res.user);
+
                 history.push('/');
             })
             .catch(error => {
@@ -46,6 +55,11 @@ export default function SignUp() {
                                     EndlessTV
                                 </a>
                                 {error && <Alert variant="danger">{error}</Alert>}
+
+                                <div className="sign__group">
+                                    <input type="text" ref={nameRef} required className="sign__input" placeholder="Name" />
+                                </div>
+
                                 <div className="sign__group">
                                     <input type="text" ref={emailRef} required className="sign__input" placeholder="Email" />
                                 </div>

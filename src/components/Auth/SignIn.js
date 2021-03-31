@@ -38,7 +38,7 @@ export default function SignUp() {
                                 <a href="index.html" className="sign__logo">EndlessTV</a>
                                 {error && <Alert variant="danger">{error}</Alert>}
                                 <div className="sign__group">
-                                    <input type="text" ref={emailRef} required className="sign__input" placeholder="Email" />
+                                    <input type="email" ref={emailRef} required className="sign__input" placeholder="Email" />
                                 </div>
                                 <div className="sign__group">
                                     <input type="password" ref={passwordRef} required className="sign__input" placeholder="Password" />
