@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, useReducer } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import firebase from '../../services/firebase'
 import { Link } from 'react-router-dom'
 import Header from '../Header/Header'
@@ -22,8 +22,7 @@ export default function Details(props) {
     const [movieDetails, setMovieDetails] = useState({});
     const [movieGenres, setMovieGenres] = useState([]);
     const [loading, setLoading] = useState(false);
-    const [commentsData, setCommentsData] = useState([]);
-    const [ignored, forceUpdate] = useReducer(x => x + 1, 0)
+    const [commentsData, setCommentsData] = useState({});
     const commentRef = useRef();
     const backgroundStyle = {
         background: `url(https://image.tmdb.org/t/p/original${movieDetails.background})`,
@@ -39,10 +38,13 @@ export default function Details(props) {
             currentMovieId, commentRef.current.value, user.displayName, user.photoURL, currentDate);
 
         commentRef.current.value = '';
-        
+
         movieService.getComments(currentMovieId)
             .then(data => {
                 setCommentsData(data);
+            })
+            .catch(err => {
+                setCommentsData({})
             })
     }
 
@@ -61,16 +63,20 @@ export default function Details(props) {
                     "imdb_id": data.imdb_id
                 })
 
+                setLoading(false)
                 setMovieGenres(data.genres)
 
             })
 
         movieService.getComments(currentMovieId)
             .then(data => {
+                console.log(data);
                 setCommentsData(data);
             })
+            .catch(err => {
+                setCommentsData({})
+            })
 
-        setLoading(false)
     }, [currentMovieId])
 
     return (
@@ -133,17 +139,19 @@ export default function Details(props) {
                                 <div class="comments">
                                     <ul class="nav nav-tabs comments__title comments__title--tabs" id="comments__tabs" role="tablist">
                                         <li class="nav-item">
-                                            <a class="nav-link active" data-toggle="tab" href="#tab-1" role="tab" aria-controls="tab-1" aria-selected="true">
+                                            <a class="nav-link" aria-selected="true">
                                                 <h4>Comments</h4>
-                                                <span>{Object.values(commentsData).length}</span>
+                                                <span>{commentsData !== null && Object.values(commentsData).length > 0 ?
+                                                    Object.values(commentsData).length : 0}</span>
                                             </a>
                                         </li>
                                     </ul>
                                     <div class="tab-content">
                                         <div class="tab-pane fade show active" id="tab-1" role="tabpanel">
                                             <ul class="comments__list">
-                                                {Object.values(commentsData).length > 0 && Object.values(commentsData)
-                                                    .map(comment => <Comment comment={comment}/>)}
+                                                {commentsData !== null && Object.values(commentsData).length > 0 &&
+                                                    Object.values(commentsData).map(
+                                                        comment => <Comment comment={comment} />)}
                                             </ul>
 
                                             <form onSubmit={onCommentHandler} class="comments__form">

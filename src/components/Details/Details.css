@@ -406,8 +406,7 @@
   flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
-  opacity: 0.5;
-  transition: opacity 0.4s linear;
+  opacity: 1;
 }
 .comments__title--tabs a:hover {
   opacity: 1;

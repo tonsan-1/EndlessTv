@@ -28,11 +28,17 @@ export default function Home() {
             .then(data => {
                 setPopular(data.results)
             })
+            .catch(err => {
+                setPopular([])
+            })
 
         movieService.getTopClassicsMoviesOfAllTime()
             .then(data => {
                 setTopMovies(data.results)
                 setLoading(false)
+            })
+            .catch(err => {
+                setTopMovies([])
             })
     }, [])
 

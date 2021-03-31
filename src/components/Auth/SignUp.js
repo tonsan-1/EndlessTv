@@ -30,7 +30,7 @@ export default function SignUp() {
 
                 res.user.updateProfile({
                     displayName: nameRef.current.value,
-                    photoURL : "https://upload.wikimedia.org/wikipedia/commons/2/24/Missing_avatar.svg"
+                    photoURL : "https://tryzambia.com/storage/user_profile_photo/default.png"
                 });
 
                 console.log(res.user);
