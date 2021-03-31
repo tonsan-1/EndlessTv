@@ -29,5 +29,24 @@ export const movieService = {
     async getMoviesBySearchInputCurrentPage(input, currentPage) {
         return await fetch(`${url}search/movie?api_key=${apiKey}&language=en-US&query=${input}&page=${currentPage}&include_adult=false`)
             .then(res => res.json());
+    },
+    async addComment(movieId, comment, displayName, photoURL, currentDate) {
+        let url = `https://endlesstv-default-rtdb.firebaseio.com/Comments/${movieId}.json`;
+
+        return await fetch(url , {
+            method : 'POST',
+            body: JSON.stringify({
+                comment,
+                displayName,
+                photoURL,
+                currentDate
+            })
+        }).then(res => res.json());
+    },
+    async getComments(movieId) {
+        let url = `https://endlesstv-default-rtdb.firebaseio.com/Comments/${movieId}.json`;
+
+        return await fetch(url)
+            .then(res => res.json());
     }
 }

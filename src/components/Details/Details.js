@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef, useReducer } from 'react'
+import firebase from '../../services/firebase'
 import { Link } from 'react-router-dom'
 import Header from '../Header/Header'
 import { movieService } from '../../services/movieService'
 import FullPageSpinner from '../Spinner/FullPageSpinner'
+import Comment from './Comment'
 
 import './Details.css'
 
@@ -20,11 +22,29 @@ export default function Details(props) {
     const [movieDetails, setMovieDetails] = useState({});
     const [movieGenres, setMovieGenres] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [commentsData, setCommentsData] = useState([]);
+    const [ignored, forceUpdate] = useReducer(x => x + 1, 0)
+    const commentRef = useRef();
     const backgroundStyle = {
         background: `url(https://image.tmdb.org/t/p/original${movieDetails.background})`,
         "background-size": "cover",
     }
 
+    function onCommentHandler(e) {
+        e.preventDefault();
+        let user = firebase.auth().currentUser;
+        let currentDate = new Date().toLocaleString();
+
+        movieService.addComment(
+            currentMovieId, commentRef.current.value, user.displayName, user.photoURL, currentDate);
+
+        commentRef.current.value = '';
+        
+        movieService.getComments(currentMovieId)
+            .then(data => {
+                setCommentsData(data);
+            })
+    }
 
     useEffect(() => {
         setLoading(true)
@@ -43,9 +63,14 @@ export default function Details(props) {
 
                 setMovieGenres(data.genres)
 
-                setLoading(false)
             })
 
+        movieService.getComments(currentMovieId)
+            .then(data => {
+                setCommentsData(data);
+            })
+
+        setLoading(false)
     }, [currentMovieId])
 
     return (
@@ -110,28 +135,22 @@ export default function Details(props) {
                                         <li class="nav-item">
                                             <a class="nav-link active" data-toggle="tab" href="#tab-1" role="tab" aria-controls="tab-1" aria-selected="true">
                                                 <h4>Comments</h4>
-                                                <span>5</span>
+                                                <span>{Object.values(commentsData).length}</span>
                                             </a>
                                         </li>
                                     </ul>
                                     <div class="tab-content">
                                         <div class="tab-pane fade show active" id="tab-1" role="tabpanel">
                                             <ul class="comments__list">
-                                                <li class="comments__item">
-                                                    <div class="comments__autor">
-                                                        <img class="comments__avatar" src="img/avatar.svg" alt="" />
-                                                        <span class="comments__name">Brian Cranston</span>
-                                                        <span class="comments__time">30.08.2021, 17:53</span>
-                                                    </div>
-                                                    <p class="comments__text">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.</p>
-                                                </li>
+                                                {Object.values(commentsData).length > 0 && Object.values(commentsData)
+                                                    .map(comment => <Comment comment={comment}/>)}
                                             </ul>
 
-                                            <form class="comments__form">
+                                            <form onSubmit={onCommentHandler} class="comments__form">
                                                 <div class="sign__group">
-                                                    <textarea id="text" name="text" class="sign__textarea" placeholder="Add comment"></textarea>
+                                                    <textarea ref={commentRef} id="text" name="text" class="sign__textarea" placeholder="Add comment"></textarea>
                                                 </div>
-                                                <button type="button" class="sign__btn">Send</button>
+                                                <button type="submit" class="sign__btn">Send</button>
                                             </form>
                                         </div>
                                     </div>
