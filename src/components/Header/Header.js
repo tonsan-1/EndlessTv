@@ -34,14 +34,14 @@ export default function Header() {
                             </a>
                             <ul className="header__nav">
                                 <li className="header__nav-item">
+                                    <Link className="header__nav-link" to="/profile">Profile</Link>
+                                </li>
+                                <li className="header__nav-item">
                                     <Link className="header__nav-link" to="/catalog">Catalog</Link>
                                 </li>
-                                <li className="header__nav-item">
-                                    <Link className="header__nav-link" to="/watchlist">Watchlist</Link>
-                                </li>
-                                <li className="header__nav-item">
+                                {/* <li className="header__nav-item">
                                     <Link className="header__nav-link" to="/favorites">Favorites</Link>
-                                </li>
+                                </li> */}
                             </ul>
                             <div className="header__actions">
                                 <form onSubmit={handleSearch} className="header__form">
