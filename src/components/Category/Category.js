@@ -4,6 +4,7 @@ import { movieService } from '../../services/movieService'
 import CategoryMovieCard from './CategoryMovieCard'
 import Header from '../Header/Header'
 import FullPageSpinner from '../Spinner/FullPageSpinner'
+
 import RangeSlider from 'react-bootstrap-range-slider';
 import 'react-bootstrap-range-slider/dist/react-bootstrap-range-slider.css';
 import './Category.css'

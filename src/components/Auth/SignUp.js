@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { useAuth } from '../../services/Auth'
-import { Alert } from 'react-bootstrap'
+import SweetAlert from 'react-bootstrap-sweetalert';
 import './Sign.css'
 
 export default function SignUp() {
@@ -11,6 +11,7 @@ export default function SignUp() {
     const passwordConfirmRef = useRef();
     const { signup } = useAuth();
     const [error, setError] = useState('');
+    const [success, setSuccess] = useState('');
     const [loading, setLoading] = useState(false);
     const history = useHistory();
 
@@ -27,18 +28,24 @@ export default function SignUp() {
             .then(res => {
                 setError('');
                 setLoading(true);
+                setSuccess(true);
 
                 res.user.updateProfile({
                     displayName: nameRef.current.value,
-                    photoURL : "https://tryzambia.com/storage/user_profile_photo/default.png"
+                    photoURL: "https://tryzambia.com/storage/user_profile_photo/default.png"
                 });
 
-                console.log(res.user);
+                setTimeout(() => {
+                    history.push('/')
+                }, 1600)
 
-                history.push('/');
             })
             .catch(error => {
                 setError(error.message);
+
+                setTimeout(() => {
+                    setError('');
+                }, 2000)
             });
 
         setLoading(false);
@@ -46,6 +53,9 @@ export default function SignUp() {
 
     return (
         <div className="sign section--full-bg">
+            {error && <SweetAlert showConfirm={false} danger title={error}/>}
+            {success && <SweetAlert showConfirm={false} success title="You signed up successfully!"/>}
+
             <div className="container">
                 <div className="row">
                     <div className="col-12">
@@ -54,8 +64,6 @@ export default function SignUp() {
                                 <a href="index.html" className="sign__logo">
                                     EndlessTV
                                 </a>
-                                {error && <Alert variant="danger">{error}</Alert>}
-
                                 <div className="sign__group">
                                     <input type="text" ref={nameRef} required className="sign__input" placeholder="Name" />
                                 </div>

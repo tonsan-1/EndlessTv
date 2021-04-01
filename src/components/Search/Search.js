@@ -22,7 +22,6 @@ export default function Search(props) {
         movieService.getMoviesBySearchInputCurrentPage(searchInput, currentPage)
             .then(data => {
                 setCurrentMovies(data.results)
-
                 setTotalResults(data.total_results);
                 setTotalPages(data.total_pages)
 
