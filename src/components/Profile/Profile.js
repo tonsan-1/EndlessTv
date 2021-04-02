@@ -1,9 +1,55 @@
-import React from 'react'
+import React, {useState, useRef} from 'react'
 import Header from '../Header/Header'
+import firebase, { storage } from '../../services/firebase'
 
 import './Profile.css'
 
 export default function Profile() {
+    let user = firebase.auth().currentUser;
+    const [imageUrl, setImageUrl] = useState(user.photoURL);
+    const [email, setEmail] = useState(user.email);
+    const [name, setName] = useState(user.displayName);
+    const [error, setError] = useState('');
+    const imageRef = useRef();
+    const emailRef = useRef();
+    const nameRef = useRef();
+
+
+    function handleSaveDetails(e) {
+        e.preventDefault();
+
+        if (imageRef.current.files.length > 0) {
+            const uploadTask = storage.ref(`images/${imageRef.current.files[0].name}`).put(imageRef.current.files[0]);
+
+            uploadTask.on(
+                "state_changed",
+                snapshot => {},
+                error => {
+                    setError(error.message)
+                },
+                () => {
+                    storage
+                        .ref("images")
+                        .child(imageRef.current.files[0].name)
+                        .getDownloadURL()
+                        .then(url => {
+                            user.updateProfile({
+                                photoURL : url
+                            })
+
+                            setImageUrl(url);
+                        })
+                        .catch(err => {
+                            setError(err.message)
+                        })
+                }
+            )
+        }
+        if (emailRef.current.value.length > 0) {
+            console.log('vliza');
+        }
+    }
+
     return (
         <div>
             <Header />
@@ -15,11 +61,11 @@ export default function Profile() {
                             <div className="profile">
                                 <div className="profile__user">
                                     <div className="profile__avatar">
-                                        <img src="img/avatar.svg" alt="" />
+                                        <img src={imageUrl} alt="" />
                                     </div>
                                     <div className="profile__meta">
-                                        <h3>John Doe</h3>
-                                        <span>FlixTV ID: 11104</span>
+                                        <h3>{name}</h3>
+                                        <span>{email}</span>
                                     </div>
                                 </div>
                             </div>
@@ -31,7 +77,7 @@ export default function Profile() {
                             <div className="sign__wrap">
                                 <div className="row">
                                     <div className="col-12 col-lg-6">
-                                        <form action="#" className="sign__form sign__form--profile sign__form--first">
+                                        <form onSubmit={handleSaveDetails} className="sign__form sign__form--profile sign__form--first">
                                             <div className="row">
                                                 <div className="col-12">
                                                     <h4 className="sign__title">Profile details</h4>
@@ -39,34 +85,25 @@ export default function Profile() {
 
                                                 <div className="col-12 col-md-6 col-lg-12 col-xl-6">
                                                     <div className="sign__group">
-                                                        <label className="sign__label" for="username">Login</label>
-                                                        <input id="username" type="text" name="username" className="sign__input" placeholder="User123" />
+                                                        <label className="sign__label" for="email">New email</label>
+                                                        <input ref={emailRef} type="text" name="email" className="sign__input"/>
                                                     </div>
                                                 </div>
 
                                                 <div className="col-12 col-md-6 col-lg-12 col-xl-6">
-                                                    <div className="sign__group">
-                                                        <label className="sign__label" for="email">Email</label>
-                                                        <input id="email" type="text" name="email" className="sign__input" placeholder="email@email.com" />
-                                                    </div>
+                                                    <label className="sign__label" for="picture">Profile Picture</label>
+                                                    <input ref={imageRef} type="file" name="picture" />
                                                 </div>
 
                                                 <div className="col-12 col-md-6 col-lg-12 col-xl-6">
                                                     <div className="sign__group">
-                                                        <label className="sign__label" for="firstname">First name</label>
-                                                        <input id="firstname" type="text" name="firstname" className="sign__input" placeholder="John" />
-                                                    </div>
-                                                </div>
-
-                                                <div className="col-12 col-md-6 col-lg-12 col-xl-6">
-                                                    <div className="sign__group">
-                                                        <label className="sign__label" for="lastname">Last name</label>
-                                                        <input id="lastname" type="text" name="lastname" className="sign__input" placeholder="Doe" />
+                                                        <label className="sign__label" for="firstname">New name</label>
+                                                        <input ref={nameRef} type="text" name="name" className="sign__input"/>
                                                     </div>
                                                 </div>
 
                                                 <div className="col-12">
-                                                    <button className="sign__btn" type="button">Save</button>
+                                                    <button className="sign__btn" type="submit">Save</button>
                                                 </div>
                                             </div>
                                         </form>

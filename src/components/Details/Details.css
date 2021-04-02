@@ -425,7 +425,9 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 40px;
+  width: 45px;
+  height: 45px;
+  object-fit: cover;
   border-radius: 10px;
 }
 .comments__name {

@@ -70,7 +70,6 @@ export default function Details(props) {
 
         movieService.getComments(currentMovieId)
             .then(data => {
-                console.log(data);
                 setCommentsData(data);
             })
             .catch(err => {
