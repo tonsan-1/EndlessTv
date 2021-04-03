@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react'
 import Header from '../Header/Header'
-import firebase, { storage } from '../../services/firebase'
+import firebase, { storage, emailAuthProvider } from '../../services/firebase'
 import SweetAlert from 'react-bootstrap-sweetalert';
 
 import './Profile.css'
@@ -11,9 +11,14 @@ export default function Profile() {
     const [imagePreview, setImagePreview] = useState(null);
     const [name, setName] = useState(user.displayName);
     const [error, setError] = useState('');
+    const [success, setSuccess] = useState('');
     const [loading, setLoading] = useState(false);
     const imageRef = useRef();
     const nameRef = useRef();
+    const oldPasswordRef = useRef();
+    const newPasswordRef = useRef();
+    const confirmNewPasswordRef = useRef();
+
 
     function handleSaveDetails(e) {
         e.preventDefault();
@@ -40,13 +45,18 @@ export default function Profile() {
                             })
                             setImageUrl(url);
                             setImagePreview(null);
+                            setSuccess(true);
+
+                            setTimeout(() => {
+                                setSuccess('');
+
+                            }, 1600)
                         })
                         .catch(err => {
                             setError(err.message)
                             setTimeout(() => {
                                 setError('')
                             }, 1600)
-                            return;
                         })
                 }
             )
@@ -58,6 +68,12 @@ export default function Profile() {
                 .then(res => {
                     setName(nameRef.current.value);
                     nameRef.current.value = '';
+                    setSuccess(true);
+
+                    setTimeout(() => {
+                        setSuccess('');
+
+                    }, 1600)
                 })
                 .catch(err => {
                     setError(err.message);
@@ -65,11 +81,7 @@ export default function Profile() {
                     setTimeout(() => {
                         setError('')
                     }, 2000)
-
-                    return;
                 })
-
-
         }
 
         setLoading(false);
@@ -81,11 +93,48 @@ export default function Profile() {
             setImagePreview(URL.createObjectURL(e.target.files[0]));
         }
     }
+    function handlePasswordChange(e) {
+        e.preventDefault();
+
+        if (newPasswordRef.current.value === confirmNewPasswordRef.current.value) {
+
+            const credential = emailAuthProvider.credential(
+                user.email,
+                oldPasswordRef.current.value
+            );
+
+            user.reauthenticateWithCredential(credential)
+                .then(() => {
+                    user.updatePassword(newPasswordRef.current.value)
+                        .then(() => {
+                            newPasswordRef.current.value = '';
+                            oldPasswordRef.current.value = '';
+                            confirmNewPasswordRef.current.value = '';
+
+                            setSuccess(true)
+
+                            setTimeout(() => {
+                                setSuccess('');
+
+                            }, 1600)
+                        })
+                })
+                .catch(err => {
+                    setError(err.message);
+
+                    setTimeout(() => {
+                        setError('')
+                    }, 2000)
+                });
+
+        }
+    }
 
     return (
         <div>
             <Header />
             {error && <SweetAlert showConfirm={false} danger title={error} />}
+            {success && <SweetAlert showConfirm={false} success title="Your details were updated successfully!" />}
 
             <div className="catalog catalog--page">
                 <div className="container">
@@ -107,7 +156,7 @@ export default function Profile() {
                             <div className="sign__wrap">
                                 <div className="row">
                                     <div className="col-12 col-lg-6">
-                                        <form onSubmit={handleSaveDetails} className="sign__form sign__form--profile sign__form--first">
+                                        <form onSubmit={handleSaveDetails} noValidate className="sign__form sign__form--profile sign__form--first">
                                             <div className="row">
                                                 <div className="col-12">
                                                     <h4 className="sign__title">Profile details</h4>
@@ -136,7 +185,7 @@ export default function Profile() {
                                         </form>
                                     </div>
                                     <div className="col-12 col-lg-6">
-                                        <form action="#" className="sign__form sign__form--profile">
+                                        <form onSubmit={handlePasswordChange} className="sign__form sign__form--profile">
                                             <div className="row">
                                                 <div className="col-12">
                                                     <h4 className="sign__title">Change password</h4>
@@ -144,23 +193,23 @@ export default function Profile() {
                                                 <div className="col-12 col-md-6 col-lg-12 col-xl-6">
                                                     <div className="sign__group">
                                                         <label className="sign__label" for="oldpass">Old password</label>
-                                                        <input id="oldpass" type="password" name="oldpass" className="sign__input" />
+                                                        <input ref={oldPasswordRef} type="password" className="sign__input" />
                                                     </div>
                                                 </div>
                                                 <div className="col-12 col-md-6 col-lg-12 col-xl-6">
                                                     <div className="sign__group">
                                                         <label className="sign__label" for="newpass">New password</label>
-                                                        <input id="newpass" type="password" name="newpass" className="sign__input" />
+                                                        <input ref={newPasswordRef} type="password" className="sign__input" />
                                                     </div>
                                                 </div>
                                                 <div className="col-12 col-md-6 col-lg-12 col-xl-6">
                                                     <div className="sign__group">
                                                         <label className="sign__label" for="confirmpass">Confirm new password</label>
-                                                        <input id="confirmpass" type="password" name="confirmpass" className="sign__input" />
+                                                        <input ref={confirmNewPasswordRef} type="password" className="sign__input" />
                                                     </div>
                                                 </div>
                                                 <div className="col-12 ">
-                                                    <button className="sign__btn" type="button">Change</button>
+                                                    <button className="sign__btn" type="submit">Change</button>
                                                 </div>
                                             </div>
                                         </form>

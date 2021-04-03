@@ -29,17 +29,17 @@ export default function Details(props) {
         "background-size": "cover",
     }
 
-    function onCommentHandler(e) {
+    async function onCommentHandler(e) {
         e.preventDefault();
         let user = firebase.auth().currentUser;
         let currentDate = new Date().toLocaleString();
 
-        movieService.addComment(
+       await movieService.addComment(
             currentMovieId, commentRef.current.value, user.displayName, user.photoURL, currentDate);
 
         commentRef.current.value = '';
 
-        movieService.getComments(currentMovieId)
+       await movieService.getComments(currentMovieId)
             .then(data => {
                 setCommentsData(data);
             })
