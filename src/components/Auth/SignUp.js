@@ -18,6 +18,7 @@ export default function SignUp() {
 
     function handleSubmit(e) {
         e.preventDefault()
+        setLoading(true);
 
         if (passwordRef.current.value !==
             passwordConfirmRef.current.value) {
@@ -27,7 +28,6 @@ export default function SignUp() {
         signup(emailRef.current.value, passwordRef.current.value)
             .then(res => {
                 setError('');
-                setLoading(true);
                 setSuccess(true);
 
                 res.user.updateProfile({
@@ -53,8 +53,8 @@ export default function SignUp() {
 
     return (
         <div className="sign section--full-bg">
-            {error && <SweetAlert showConfirm={false} danger title={error}/>}
-            {success && <SweetAlert showConfirm={false} success title="You signed up successfully!"/>}
+            {error && <SweetAlert showConfirm={false} danger title={error} />}
+            {success && <SweetAlert showConfirm={false} success title="You signed up successfully!" />}
 
             <div className="container">
                 <div className="row">
