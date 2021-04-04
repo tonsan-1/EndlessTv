@@ -47,7 +47,7 @@ export default function SignUp() {
                     <div className="col-12">
                         <div className="sign__content">
                             <form onSubmit={handleSubmit} className="sign__form">
-                                <a href="index.html" className="sign__logo">EndlessTV</a>
+                                <p className="sign__logo">EndlessTV</p>
                                 <div className="sign__group">
                                     <input type="email" ref={emailRef} required className="sign__input" placeholder="Email" />
                                 </div>
@@ -56,7 +56,7 @@ export default function SignUp() {
                                 </div>
                                 <button disabled={loading} className="sign__btn" type="submit">Sign in</button>
                                 <span className="sign__text">Don't have an account? <Link to="/signup">Sign up!</Link></span>
-                                <span className="sign__text"><a href="forgot.html">Forgot password?</a></span>
+                                {/* <span className="sign__text"><a href="forgot.html">Forgot password?</a></span> */}
                             </form>
                         </div>
                     </div>

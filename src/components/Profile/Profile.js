@@ -73,8 +73,6 @@ export default function Profile() {
                     setName(nameRef.current.value);
                     nameRef.current.value = '';
 
-                    
-
                     setSuccess(true);
                     setTimeout(() => {
                         setSuccess('');

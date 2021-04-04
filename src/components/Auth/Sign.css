@@ -309,6 +309,7 @@
     }
     .sign__logo {
       margin-bottom: 40px;
+      color: white;
     }
   }
   @media (min-width: 768px) {

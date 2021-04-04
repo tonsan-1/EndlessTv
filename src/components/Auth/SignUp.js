@@ -67,9 +67,9 @@ export default function SignUp() {
                     <div className="col-12">
                         <div className="sign__content">
                             <form onSubmit={handleSubmit} className="sign__form">
-                                <a href="index.html" className="sign__logo">
+                                <p className="sign__logo">
                                     EndlessTV
-                                </a>
+                                </p>
                                 <div className="sign__group">
                                     <input type="text" ref={nameRef} required className="sign__input" placeholder="Name" />
                                 </div>
