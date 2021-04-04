@@ -9,10 +9,10 @@ EndlessTV is a free platform where you can watch your favorite movies with just 
 
 ## 🔨 Built with
 
-*ReactJS
-*React-router-dom
-*React-bootstrap-sweetalert
-*React-owl-carousel2
-*Firebase authtentication and realtime database
-*Bootstrap
-*Javascript
+*ReactJS*
+*React-router-dom*
+*React-bootstrap-sweetalert*
+*React-owl-carousel2*
+*Firebase authtentication and realtime database*
+*Bootstrap*
+*Javascript*
