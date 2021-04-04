@@ -29,19 +29,18 @@ export default function Header() {
                 <div className="row">
                     <div className="col-12">
                         <div className="header__content">
-                            <a href="/" className="header__logo">
-                                <Link to="/">EndlessTV</Link>
-                            </a>
+                            <Link className="header__logo" to="/">EndlessTV</Link>
+                            
                             <ul className="header__nav">
-                                <li className="header__nav-item">
-                                    <Link className="header__nav-link" to="/profile">Profile</Link>
-                                </li>
                                 <li className="header__nav-item">
                                     <Link className="header__nav-link" to="/catalog">Catalog</Link>
                                 </li>
-                                {/* <li className="header__nav-item">
+                                <li className="header__nav-item">
                                     <Link className="header__nav-link" to="/favorites">Favorites</Link>
-                                </li> */}
+                                </li>
+                                <li className="header__nav-item">
+                                    <Link className="header__nav-link" to="/profile">Profile</Link>
+                                </li>
                             </ul>
                             <div className="header__actions">
                                 <form onSubmit={handleSearch} className="header__form">
