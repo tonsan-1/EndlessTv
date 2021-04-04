@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react'
 import Header from '../Header/Header'
 import firebase, { storage, emailAuthProvider } from '../../services/firebase'
+import { movieService } from '../../services/movieService'
 import SweetAlert from 'react-bootstrap-sweetalert';
 
 import './Profile.css'
@@ -20,10 +21,12 @@ export default function Profile() {
     const confirmNewPasswordRef = useRef();
 
 
-    function handleSaveDetails(e) {
+    async function handleSaveDetails(e) {
         e.preventDefault();
 
         setLoading(true);
+
+        const key = await movieService.getUserDetails(user.uid);
 
         if (imageRef.current.files.length > 0) {
             const uploadTask = storage.ref(`images/${imageRef.current.files[0].name}`)
@@ -45,11 +48,12 @@ export default function Profile() {
                             })
                             setImageUrl(url);
                             setImagePreview(null);
-                            setSuccess(true);
 
+                            movieService.updateUserPhotoURL(url, user.uid, Object.keys(key)[0]);
+
+                            setSuccess(true);
                             setTimeout(() => {
                                 setSuccess('');
-
                             }, 1600)
                         })
                         .catch(err => {
@@ -68,8 +72,10 @@ export default function Profile() {
                 .then(res => {
                     setName(nameRef.current.value);
                     nameRef.current.value = '';
-                    setSuccess(true);
 
+                    
+
+                    setSuccess(true);
                     setTimeout(() => {
                         setSuccess('');
 

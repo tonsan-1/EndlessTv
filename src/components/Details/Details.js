@@ -35,7 +35,7 @@ export default function Details(props) {
         let currentDate = new Date().toLocaleString();
 
        await movieService.addComment(
-            currentMovieId, commentRef.current.value, user.displayName, user.photoURL, currentDate);
+            currentMovieId, commentRef.current.value, user.uid, currentDate);
 
         commentRef.current.value = '';
 

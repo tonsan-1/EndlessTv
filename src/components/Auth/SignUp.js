@@ -1,8 +1,11 @@
 import React, { useRef, useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { useAuth } from '../../services/Auth'
+import { movieService } from '../../services/movieService'
 import SweetAlert from 'react-bootstrap-sweetalert';
 import './Sign.css'
+
+const defaultProfilePicture = "https://tryzambia.com/storage/user_profile_photo/default.png";
 
 export default function SignUp() {
     const nameRef = useRef();
@@ -32,8 +35,11 @@ export default function SignUp() {
 
                 res.user.updateProfile({
                     displayName: nameRef.current.value,
-                    photoURL: "https://tryzambia.com/storage/user_profile_photo/default.png"
+                    photoURL: defaultProfilePicture
                 });
+
+                movieService.addUserDetails(
+                    nameRef.current.value, defaultProfilePicture, res.user.uid)
 
                 setTimeout(() => {
                     history.push('/')
