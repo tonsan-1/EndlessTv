@@ -74,5 +74,21 @@ export const movieService = {
                 photoURL
             })
         }).then(res => res.json());
+    },
+    async addToFavorites(userUid, movieId) {
+        let url = `https://endlesstv-default-rtdb.firebaseio.com/Favorites/${userUid}.json`;
+
+        return await fetch(url, {
+            method: 'POST',
+            body: JSON.stringify({
+                movieId
+            })
+        }).then(res => res.json());
+    },
+    async getFavoriteMovies(userUid) {
+        let url = `https://endlesstv-default-rtdb.firebaseio.com/Favorites/${userUid}.json`;
+
+        return await fetch(url)
+            .then(res => res.json());
     }
 }
