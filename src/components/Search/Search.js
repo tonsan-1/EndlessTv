@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import Header from '../Header/Header'
+import Footer from '../Footer/Footer'
 import { movieService } from '../../services/movieService'
 import CategoryMovieCard from '../Category/CategoryMovieCard'
 import FullPageSpinner from '../Spinner/FullPageSpinner'
@@ -15,7 +16,7 @@ export default function Search(props) {
     const [totalPages, setTotalPages] = useState(1);
     const [loading, setLoading] = useState();
 
-    
+
     useEffect(() => {
         setLoading(true)
 
@@ -84,6 +85,7 @@ export default function Search(props) {
                     </div>
                 </div>
             }
+            <Footer />
         </div>
     )
 }

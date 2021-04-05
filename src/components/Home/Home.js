@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { movieService } from '../../services/movieService'
 import Header from '../Header/Header'
+import Footer from '../Footer/Footer'
 import HomeMovieCard from '../Home/HomeMovieCard'
 import FullPageSpinner from '../Spinner/FullPageSpinner'
 import OwlCarousel from 'react-owl-carousel2';
@@ -20,7 +21,7 @@ export default function Home() {
     const [popular, setPopular] = useState([]);
     const [topMovies, setTopMovies] = useState([]);
     const [loading, setLoading] = useState(false);
-    
+
     useEffect(() => {
         setLoading(true)
 
@@ -78,6 +79,7 @@ export default function Home() {
                     </section>
                 </div>
             }
+            <Footer />
         </div>
     )
 }

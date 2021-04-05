@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react'
 import Header from '../Header/Header'
+import Footer from '../Footer/Footer'
 import firebase, { storage, emailAuthProvider } from '../../services/firebase'
 import { movieService } from '../../services/movieService'
 import SweetAlert from 'react-bootstrap-sweetalert';
@@ -224,6 +225,7 @@ export default function Profile() {
                     </div>
                 </div>
             </div>
+            <Footer />
         </div>
 
     )

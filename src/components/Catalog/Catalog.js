@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { movieService } from '../../services/movieService'
 import CatalogGenreCard from '../Catalog/CatalogGenreCard'
 import Header from '../Header/Header'
+import Footer from '../Footer/Footer'
 import FullPageSpinner from '../Spinner/FullPageSpinner'
 
 import './Catalog.css'
@@ -37,7 +38,9 @@ export default function Catalog() {
                             </div>
                         </div>
                     </section>
-                </div>}
+                </div>
+            }
+            <Footer />
         </div>
     )
 }

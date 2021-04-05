@@ -168,7 +168,6 @@ body::-webkit-scrollbar-thumb {
   right: 0;
   display: block;
   z-index: 1;
-  background: linear-gradient(0deg, rgba(21,31,48,0.35) 0%, #131720 100%);
   pointer-events: none;
 }
 .section--gradient .container {

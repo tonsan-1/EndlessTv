@@ -3,6 +3,7 @@ import { Link, useHistory } from 'react-router-dom'
 import { movieService } from '../../services/movieService'
 import CategoryMovieCard from './CategoryMovieCard'
 import Header from '../Header/Header'
+import Footer from '../Footer/Footer'
 import FullPageSpinner from '../Spinner/FullPageSpinner'
 
 import RangeSlider from 'react-bootstrap-range-slider';
@@ -125,8 +126,8 @@ export default function Category(props) {
                     </div>
                 </div>
             </div>
-
-
+            
+            <Footer />
         </div>
     )
 }
