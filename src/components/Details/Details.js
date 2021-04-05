@@ -109,7 +109,7 @@ export default function Details(props) {
                                     </div>
                                 </div>
                                 <div className="col-12 col-xl-8">
-                                    <iframe src={`http://databasegdriveplayer.co/player.php?imdb=${movieDetails.imdb_id}`} title="myiFrame" scrolling="no" frameborder="0" marginheight="0px" marginwidth="0px" height="400px" width="700px" allowfullscreen></iframe>
+                                    <iframe src={`http://databasegdriveplayer.co/player.php?imdb=${movieDetails.imdb_id}`} title="myiFrame" scrolling="no" frameborder="0" height="400px" width="700px" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
                                 </div>
                                 <div className="col-12 col-xl-8">
                                     <div className="categories">
