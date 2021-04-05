@@ -75,6 +75,16 @@ export const movieService = {
             })
         }).then(res => res.json());
     },
+    async updateUserDisplayName(displayName, userUid, key) {
+        let url = `https://endlesstv-default-rtdb.firebaseio.com/Users/${userUid}/${key}.json`;
+
+        return await fetch(url, {
+            method: 'PATCH',
+            body: JSON.stringify({
+                displayName
+            })
+        }).then(res => res.json());
+    },
     async addToFavorites(userUid, movieId) {
         let url = `https://endlesstv-default-rtdb.firebaseio.com/Favorites/${userUid}.json`;
 

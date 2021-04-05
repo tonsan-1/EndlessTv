@@ -27,7 +27,7 @@ export default function Profile() {
 
         setLoading(true);
 
-        const key = await movieService.getUserDetails(user.uid);
+        const userData = await movieService.getUserDetails(user.uid);
 
         if (imageRef.current.files.length > 0) {
             const uploadTask = storage.ref(`images/${imageRef.current.files[0].name}`)
@@ -50,7 +50,7 @@ export default function Profile() {
                             setImageUrl(url);
                             setImagePreview(null);
 
-                            movieService.updateUserPhotoURL(url, user.uid, Object.keys(key)[0]);
+                            movieService.updateUserPhotoURL(url, user.uid, Object.keys(userData)[0]);
 
                             setSuccess(true);
                             setTimeout(() => {
@@ -72,6 +72,10 @@ export default function Profile() {
             })
                 .then(res => {
                     setName(nameRef.current.value);
+
+                    movieService.updateUserDisplayName(
+                        nameRef.current.value, user.uid, Object.keys(userData)[0]);
+
                     nameRef.current.value = '';
 
                     setSuccess(true);
