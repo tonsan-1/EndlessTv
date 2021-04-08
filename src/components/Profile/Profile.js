@@ -8,7 +8,7 @@ import SweetAlert from 'react-bootstrap-sweetalert';
 import './Profile.css'
 
 export default function Profile() {
-    const user = firebase.auth().currentUser;
+    const user = firebase.auth().currentUser; //use authcontext to get current user
     const [imageUrl, setImageUrl] = useState(user.photoURL);
     const [imagePreview, setImagePreview] = useState(null);
     const [name, setName] = useState(user.displayName);

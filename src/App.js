@@ -1,5 +1,6 @@
 import React from 'react'
 import { AuthProvider } from './context/AuthContext'
+import { GlobalMovieProvider } from './context/GlobalMovieState'
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Home from './components/Home/Home'
 import SignIn from './components/Auth/SignIn'
@@ -18,20 +19,22 @@ import './App.css'
 function App() {
   return (
     <AuthProvider>
-      <Router>
-        <ScrollToTop/>
-        <Switch>
-          <Route exact path="/signin" component={SignIn} />
-          <Route exact path="/signup" component={SignUp} />
-          <PrivateRoute exact path="/" component={Home} />
-          <PrivateRoute exact path="/profile" component={Profile} />
-          <PrivateRoute exact path="/catalog" component={Catalog} />
-          <PrivateRoute exact path="/favorites" component={Favorites} />
-          <PrivateRoute exact path="/categories/:genreId/:genreName/:currentPage" component={Category} />
-          <PrivateRoute exact path="/details/:id" component={Details} />
-          <PrivateRoute exact path="/search/:searchInput/:currentPage" component={Search} />
-        </Switch>
-      </Router>
+      <GlobalMovieProvider>
+        <Router>
+          <ScrollToTop />
+          <Switch>
+            <Route exact path="/signin" component={SignIn} />
+            <Route exact path="/signup" component={SignUp} />
+            <PrivateRoute exact path="/" component={Home} />
+            <PrivateRoute exact path="/profile" component={Profile} />
+            <PrivateRoute exact path="/catalog" component={Catalog} />
+            <PrivateRoute exact path="/favorites" component={Favorites} />
+            <PrivateRoute exact path="/categories/:genreId/:genreName/:currentPage" component={Category} />
+            <PrivateRoute exact path="/details/:id" component={Details} />
+            <PrivateRoute exact path="/search/:searchInput/:currentPage" component={Search} />
+          </Switch>
+        </Router>
+      </GlobalMovieProvider>
     </AuthProvider>
   );
 }
