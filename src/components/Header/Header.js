@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import { useAuth } from '../../services/Auth'
+import { useAuth } from '../../context/AuthContext'
 import { Link, useHistory } from 'react-router-dom'
 
 import './Header.css'

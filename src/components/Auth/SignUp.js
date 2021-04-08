@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
-import { useAuth } from '../../services/Auth'
+import { useAuth } from '../../context/AuthContext'
 import { movieService } from '../../services/movieService'
 import SweetAlert from 'react-bootstrap-sweetalert';
 import './Sign.css'
