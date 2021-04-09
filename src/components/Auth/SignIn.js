@@ -48,6 +48,7 @@ export default function SignUp() {
                         <div className="sign__content">
                             <form onSubmit={handleSubmit} className="sign__form">
                                 <p className="sign__logo">EndlessTV</p>
+
                                 <div className="sign__group">
                                     <input type="email" ref={emailRef} required className="sign__input" placeholder="Email" />
                                 </div>

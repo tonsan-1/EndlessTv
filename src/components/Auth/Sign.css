@@ -5,6 +5,7 @@
     display: block;
     position: relative;
   }
+
   .sign__content {
     display: flex;
     flex-direction: row;
@@ -13,6 +14,21 @@
     width: 100%;
     min-height: 100vh;
     padding: 40px 0;
+  }
+  .section--full-bg::before {
+    content: '';
+    display: block;
+    height: 100%;
+    position: absolute;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  .section--full-bg {
+    background-image: url('../../img/background.jpg');
+    background-repeat: no-repeat;
+    background-size:cover;
+    position: relative;
+
   }
   .sign__form {
     background-color: #131720;
