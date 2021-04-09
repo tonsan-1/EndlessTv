@@ -5,7 +5,12 @@ export default function AppReducer(state, action){
                 ...state,
                 favorites: [action.payload, ...state.favorites]
             }
-        default :
+        case 'REMOVE_MOVIE_FROM_FAVORITES' :
+            return {
+                ...state,
+                favorites: state.favorites.filter(movie => movie.id !== action.payload)
+            }
+        default:
         return state;
     }
 };

@@ -594,7 +594,7 @@ body::-webkit-scrollbar-thumb {
   align-items: center;
   transform: scale(0.8);
 }
-.card__add svg {
+.card__add svg{
   width: 16px;
   height: auto;
   fill: #2f80ed;
@@ -603,6 +603,34 @@ body::-webkit-scrollbar-thumb {
 .card__add:hover svg,
 .card__add.active svg {
   fill: #ffc312;
+}
+.card__remove {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 3;
+  transition: 0.5s;
+  opacity: 0;
+  pointer-events: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
+  background-color: #151f30;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  transform: scale(0.8);
+}
+.card__remove i {
+  width: 16px;
+  height: auto;
+  color: #2f80ed;
+  transition: 0.5s;
+}
+.card__remove:hover i,
+.card__remove.active i {
+  color: #ffc312;
 }
 .card__rating {
   display: flex;
@@ -738,6 +766,11 @@ body::-webkit-scrollbar-thumb {
   pointer-events: auto;
   transform: scale(1);
 }
+.card:hover .card__remove {
+  opacity: 1;
+  pointer-events: auto;
+  transform: scale(1);
+}
 .card:hover .card__rating {
   opacity: 1;
   transform: scale(1);
@@ -767,11 +800,13 @@ body::-webkit-scrollbar-thumb {
   .card__cover svg {
     width: 56px;
   }
-  .card__add {
+  .card__add,
+  .card__remove {
     top: 15px;
     left: 15px;
   }
-  .card__add svg {
+  .card__add svg,
+  .card__remove i {
     width: 18px;
   }
   .card__rating {

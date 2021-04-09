@@ -85,13 +85,13 @@ export const movieService = {
             })
         }).then(res => res.json());
     },
-    async addToFavorites(userUid, movieId) {
+    async addToFavorites(userUid, favorites) {
         let url = `https://endlesstv-default-rtdb.firebaseio.com/Favorites/${userUid}.json`;
 
         return await fetch(url, {
-            method: 'POST',
+            method: 'PUT',
             body: JSON.stringify({
-                movieId
+                favorites
             })
         }).then(res => res.json());
     },
