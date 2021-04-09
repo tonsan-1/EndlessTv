@@ -2,7 +2,7 @@ import { createContext, useReducer, useEffect } from 'react'
 import AppReducer from './AppReducer'
 
 let initialState = {
-    favorites: localStorage.getItem('favorites') ?
+    favorites: JSON.parse(localStorage.getItem('favorites')).length > 0 ?
         JSON.parse(localStorage.getItem('favorites')) : []
 }
 

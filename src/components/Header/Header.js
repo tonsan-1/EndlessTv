@@ -20,6 +20,8 @@ export default function Header() {
 
         logout()
             .then(res => {
+                window.localStorage.clear();
+                window.localStorage.setItem('favorites', JSON.stringify([]));
                 history.push('/signin')
             })
     }

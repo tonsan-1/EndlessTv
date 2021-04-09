@@ -14,7 +14,8 @@ export default function Favorites() {
             <Header />
             <div className="container margin-top">
                 <div className="row row--grid">
-                    {favorites.length > 0 && favorites.map(movie => <FavoritesMovieCard movie={movie} key={movie.id} />)}
+                    {favorites.length > 0 ? favorites.map(movie => <FavoritesMovieCard movie={movie} key={movie.id} />) :
+                    <h1 className="emtpy-fav-list"> You currently don't have any favorite movies. Add some!</h1> }
                 </div>
             </div>
             <Footer/>
