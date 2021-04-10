@@ -1,28 +1,38 @@
-import { createContext, useReducer, useEffect } from 'react'
-import AppReducer from './AppReducer'
-
-let initialState = {
-    favorites: JSON.parse(localStorage.getItem('favorites')).length > 0 ?
-        JSON.parse(localStorage.getItem('favorites')) : []
-}
+import { createContext, useEffect, useState } from 'react'
+import { useAuth } from '../context/AuthContext'
+import { movieService } from '../services/movieService'
 
 // create context
-export const GlobalMovieContext = createContext(initialState);
+export const GlobalMovieContext = createContext();
 
-// provider components
-export const GlobalMovieProvider = props => {
-    const [state, dispatch] = useReducer(AppReducer, initialState);
+// create provider 
+export function GlobalMovieProvider(props) {
+    const { currentUser } = useAuth();
+    const [state, setState] = useState({ favorites: [] });
 
     useEffect(() => {
-        localStorage.setItem('favorites', JSON.stringify(state.favorites));
-    }, [state])
+        movieService.getFavoriteMovies(currentUser.uid)
+            .then(data => {
+                if (data !== null) {
+                    setState(data);
+                }
+            })
+    }, [currentUser.uid]);
+
+    useEffect(() => {
+        movieService.addToFavorites(currentUser.uid, state.favorites)
+    }, [state, currentUser.uid])
 
     //actions
     const addMovieToFavorites = movie => {
-        dispatch({ type: "ADD_MOVIE_TO_FAVORITES", payload: movie })
+        setState(prevState => {
+            return {favorites : [...prevState.favorites, movie]}
+        })
     }
     const removeMovieFromFavorites = (id) => {
-        dispatch({ type: "REMOVE_MOVIE_FROM_FAVORITES", payload: id});
+        setState(prevState => {
+            return {favorites : prevState.favorites.filter(movie => movie.id !== id )}
+        })
     }
 
     return (

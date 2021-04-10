@@ -166,6 +166,29 @@
   .article__content blockquote:last-child {
     margin-bottom: 0;
   }
+  .article__favorites {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    width: auto;
+    margin-bottom: 20px;
+    color: #e0e0e0;
+    font-size: 14px;
+  }
+  .article__favorites svg {
+    width: 20px;
+    height: auto;
+    fill: #2f80ed;
+    transition: fill 0.5s ease;
+    margin-right: 6px;
+    margin-bottom: 1px;
+  }
+  .article__favorites:hover svg
+   {
+    fill: #ffc312;
+  }
+  
   .article__content ul {
     margin-bottom: 20px;
     display: block;
