@@ -13,11 +13,14 @@ export default function SignUp() {
     const passwordRef = useRef();
     const passwordConfirmRef = useRef();
     const { signup } = useAuth();
-    const [error, setError] = useState('');
-    const [success, setSuccess] = useState('');
+    const [error, setError] = useState(false);
+    const [success, setSuccess] = useState(false);
     const [loading, setLoading] = useState(false);
     const history = useHistory();
 
+    function onErrorConfirm(e) {
+        setError(false);
+    }
 
     function handleSubmit(e) {
         e.preventDefault()
@@ -25,12 +28,14 @@ export default function SignUp() {
 
         if (passwordRef.current.value !==
             passwordConfirmRef.current.value) {
+            setLoading(false);
+
             return setError('Passwords do not match!')
         }
 
         signup(emailRef.current.value, passwordRef.current.value)
             .then(res => {
-                setError('');
+                setError(false);
                 setSuccess(true);
 
                 res.user.updateProfile({
@@ -45,22 +50,20 @@ export default function SignUp() {
                     history.push('/')
                 }, 1600)
 
+                setLoading(false);
+
             })
             .catch(error => {
                 setError(error.message);
-
-                setTimeout(() => {
-                    setError('');
-                }, 2000)
             });
-
+            
         setLoading(false);
     }
 
     return (
         <div className="sign section--full-bg">
-            {error && <SweetAlert showConfirm={false} danger title={error} />}
-            {success && <SweetAlert showConfirm={false} success title="You signed up successfully!" />}
+            {error && <SweetAlert timeout={1500} onConfirm={() => setError(false)} showConfirm={false} danger title={error} />}
+            {success && <SweetAlert timeout={1500} onConfirm={() => setSuccess(false)} showConfirm={false} success title="You signed up successfully!" />}
 
             <div className="container">
                 <div className="row">

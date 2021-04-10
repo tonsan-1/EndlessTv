@@ -19,7 +19,7 @@ export default function SignUp() {
 
         login(emailRef.current.value, passwordRef.current.value)
             .then(res => {
-                setError('');
+                setError(false);
                 setSuccess(true);
                 setLoading(true);
 
@@ -29,18 +29,14 @@ export default function SignUp() {
             })
             .catch(error => {
                 setError(error.message);
-
-                setTimeout(() => {
-                    setError('');
-                }, 2000)
             });
 
         setLoading(false);
     }
     return (
         <div className="sign section--full-bg">
-            {error && <SweetAlert showConfirm={false} danger title={error}/>}
-            {success && <SweetAlert showConfirm={false} success title="You signed in successfully!"/>}
+            {error && <SweetAlert timeout={1500} onConfirm={() => setError(false)} showConfirm={false} danger title={error} />}
+            {success && <SweetAlert timeout={1500} onConfirm={() => setSuccess(false)} showConfirm={false} success title="You signed in successfully!" />}
 
             <div className="container">
                 <div className="row">
@@ -57,7 +53,6 @@ export default function SignUp() {
                                 </div>
                                 <button disabled={loading} className="sign__btn" type="submit">Sign in</button>
                                 <span className="sign__text">Don't have an account? <Link to="/signup">Sign up!</Link></span>
-                                {/* <span className="sign__text"><a href="forgot.html">Forgot password?</a></span> */}
                             </form>
                         </div>
                     </div>

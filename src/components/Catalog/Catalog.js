@@ -9,9 +9,11 @@ import './Catalog.css'
 
 
 export default function Catalog() {
+    //states for genres and loading
     const [genres, setGenres] = useState([]);
     const [loading, setLoading] = useState(false);
 
+    //fetch function to get all the genres
     useEffect(() => {
         setLoading(true)
 

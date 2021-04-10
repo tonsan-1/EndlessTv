@@ -22,7 +22,9 @@ export function GlobalMovieProvider(props) {
     }, [currentUser]);
 
     useEffect(() => {
-        movieService.addToFavorites(currentUser.uid, state.favorites)
+        if (currentUser) {
+            movieService.addToFavorites(currentUser.uid, state.favorites)
+        }
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [state])

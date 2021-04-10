@@ -9,6 +9,8 @@ import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
 import './Home.css'
 
+
+// Carousel options
 const options = {
     items: 5,
     margin: 15,
@@ -18,29 +20,30 @@ const options = {
 }
 
 export default function Home() {
+    //states for populars, classics and loading
     const [popular, setPopular] = useState([]);
-    const [topMovies, setTopMovies] = useState([]);
+    const [classicMovies, setClassicMovies] = useState([]);
     const [loading, setLoading] = useState(false);
 
+
+    //fetch functions to get the movies
     useEffect(() => {
         setLoading(true)
 
         movieService.getPopularMovies()
             .then(data => {
-                setPopular(data.results)
-            })
-            .catch(err => {
-                setPopular([])
-            })
+                if (data !== null) {
+                    setPopular(data.results)
+                }
+            });
 
         movieService.getTopClassicsMoviesOfAllTime()
             .then(data => {
-                setTopMovies(data.results)
-                setLoading(false)
-            })
-            .catch(err => {
-                setTopMovies([])
-            })
+                if (data !== null) {
+                    setClassicMovies(data.results)
+                    setLoading(false)
+                }
+            });
     }, [])
 
     return (
@@ -70,7 +73,7 @@ export default function Home() {
                                 <div class="col-12">
                                     <div class="section__carousel-wrap">
                                         <OwlCarousel options={options}>
-                                            {topMovies.length > 0 ? topMovies.map(movie => <HomeMovieCard movie={movie} key={movie.id} />) : ""}
+                                            {classicMovies.length > 0 ? classicMovies.map(movie => <HomeMovieCard movie={movie} key={movie.id} />) : ""}
                                         </OwlCarousel>
                                     </div>
                                 </div>
