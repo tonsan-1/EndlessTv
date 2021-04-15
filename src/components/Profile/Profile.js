@@ -53,15 +53,9 @@ export default function Profile() {
                             movieService.updateUserPhotoURL(url, user.uid, Object.keys(userData)[0]);
 
                             setSuccess(true);
-                            setTimeout(() => {
-                                setSuccess('');
-                            }, 1600)
                         })
                         .catch(err => {
                             setError(err.message)
-                            setTimeout(() => {
-                                setError('')
-                            }, 1600)
                         })
                 }
             )
@@ -79,17 +73,9 @@ export default function Profile() {
                     nameRef.current.value = '';
 
                     setSuccess(true);
-                    setTimeout(() => {
-                        setSuccess('');
-
-                    }, 1600)
                 })
                 .catch(err => {
                     setError(err.message);
-
-                    setTimeout(() => {
-                        setError('')
-                    }, 2000)
                 })
         }
 
@@ -105,45 +91,38 @@ export default function Profile() {
     function handlePasswordChange(e) {
         e.preventDefault();
 
-        if (newPasswordRef.current.value === confirmNewPasswordRef.current.value) {
-
-            const credential = emailAuthProvider.credential(
-                user.email,
-                oldPasswordRef.current.value
-            );
-
-            user.reauthenticateWithCredential(credential)
-                .then(() => {
-                    user.updatePassword(newPasswordRef.current.value)
-                        .then(() => {
-                            newPasswordRef.current.value = '';
-                            oldPasswordRef.current.value = '';
-                            confirmNewPasswordRef.current.value = '';
-
-                            setSuccess(true)
-
-                            setTimeout(() => {
-                                setSuccess('');
-
-                            }, 1600)
-                        })
-                })
-                .catch(err => {
-                    setError(err.message);
-
-                    setTimeout(() => {
-                        setError('')
-                    }, 2000)
-                });
-
+        if (newPasswordRef.current.value !== confirmNewPasswordRef.current.value) {
+            setError('Passwords must match!')
+            return;
         }
+
+        const credential = emailAuthProvider.credential(
+            user.email,
+            oldPasswordRef.current.value
+        );
+
+        user.reauthenticateWithCredential(credential)
+            .then(() => {
+                user.updatePassword(newPasswordRef.current.value)
+                    .then(() => {
+                        newPasswordRef.current.value = '';
+                        oldPasswordRef.current.value = '';
+                        confirmNewPasswordRef.current.value = '';
+
+                        setSuccess(true)
+                    })
+            })
+            .catch(err => {
+                setError(err.message);
+            });
     }
 
     return (
         <div>
             <Header />
-            {error && <SweetAlert showConfirm={false} danger title={error} />}
-            {success && <SweetAlert showConfirm={false} success title="Your details were updated successfully!" />}
+            {error && <SweetAlert timeout={1500} onConfirm={() => setError(false)} showConfirm={false} danger title={error} />}
+            {success && <SweetAlert timeout={1500} onConfirm={() => setSuccess(false)} showConfirm={false} success title="Your details were updated successfully!"/>}
+
 
             <div className="catalog catalog--page">
                 <div className="container">
