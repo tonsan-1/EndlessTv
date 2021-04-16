@@ -40,9 +40,12 @@ export function GlobalMovieProvider(props) {
             return { favorites: prevState.favorites.filter(movie => movie.id !== id) }
         })
     }
+    const clearFavoritesState = () => {
+        setState({favorites : []})
+    }
 
     return (
-        <GlobalMovieContext.Provider value={{ favorites: state.favorites, addMovieToFavorites, removeMovieFromFavorites }}>
+        <GlobalMovieContext.Provider value={{ favorites: state.favorites, addMovieToFavorites, removeMovieFromFavorites, clearFavoritesState }}>
             {props.children}
         </GlobalMovieContext.Provider>
     )

@@ -1,10 +1,12 @@
-import React, { useRef } from 'react'
+import React, { useRef, useContext } from 'react'
 import { useAuth } from '../../context/AuthContext'
+import { GlobalMovieContext } from '../../context/GlobalMovieState'
 import { Link, useHistory } from 'react-router-dom'
 
 import './Header.css'
 
 export default function Header() {
+    const { clearFavoritesState } = useContext(GlobalMovieContext);
     const { logout } = useAuth();
     const history = useHistory();
     const searchInputRef = useRef();
@@ -20,6 +22,8 @@ export default function Header() {
 
         logout()
             .then(res => {
+                clearFavoritesState();
+                
                 history.push('/signin')
             })
     }
