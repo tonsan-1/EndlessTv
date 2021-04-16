@@ -8,7 +8,7 @@ export default function Category({ genre }) {
     useEffect(() => {
         movieService.getMoviesByGenre(genre.id)
             .then(data => {
-                const currentPosterPath = data.results[18].poster_path;
+                const currentPosterPath = data.results[2].poster_path;
 
                 setGenrePoster(currentPosterPath);
             })
