@@ -6,6 +6,7 @@ import { GlobalMovieContext } from '../../context/GlobalMovieState'
 export default function HomeMovieCard({ movie }) {
     const { addMovieToFavorites, favorites } = useContext(GlobalMovieContext);
     const [genres, setGenres] = useState([]);
+    let releaseDate = new Date(movie.release_date);
 
     let storedFavorites = favorites.find(x => x.id === movie.id);
 
@@ -40,8 +41,8 @@ export default function HomeMovieCard({ movie }) {
             </h3>
             <ul class="card__list">
                 {genres.length > 0 && genres.map(genre =>
-                    <li>{genre.name === 'Science Fiction' ? 'Sci-Fi' : genre.name}</li>)}
-                <li>{movie.release_date.substring(4, 0)}</li>
+                    <li>{genre.name}</li>)}
+                <li>{releaseDate.getFullYear()}</li>
             </ul>
         </div>
     )
