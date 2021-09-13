@@ -25,6 +25,7 @@ Website: https://endlesstv.web.app/ <br/>
   - CSS
   - [Bootstrap 4](https://getbootstrap.com/ "Bootstrap 4")
 - Additionals:
+  - Gdrive Player API
   - Firebase Authtentication API
   - React-router-dom
   - React-bootstrap-sweetalert
