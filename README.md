@@ -1,5 +1,5 @@
 # EndlessTV
-Free online movies streaming<br/>
+This is a defense project for the ReactJS course at SoftUni
 
 EndlessTV is a free platform where you can watch your favorite movies with just a click of
 button. All you need is a quick registration and you'll have access to various movie genres,
